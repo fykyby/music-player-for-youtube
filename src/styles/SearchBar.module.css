@@ -1,0 +1,16 @@
+.search {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color1);
+  height: 52px;
+  box-shadow: var(--shadow);
+  padding-inline: 20px;
+}
+
+.search input {
+  width: 300px;
+  max-width: 75%;
+}

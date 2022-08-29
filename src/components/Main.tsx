@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "../styles/Main.module.css";
-import { Search } from "react-bootstrap-icons";
-import Video from "./Video";
+import SearchBar from "./SearchBar";
+import SearchResults from "./SearchResults";
 
 interface Props {
   setNewSource(id: string): void;
@@ -9,54 +9,12 @@ interface Props {
 
 // setNewSource("YdYwICNPDwI");
 export default function Main({ setNewSource }: Props): JSX.Element {
-  const [inputVal, setInputVal] = useState<string>("");
   const [results, setResults] = useState<Array<Object>>([]);
-
-  async function getSearchResults() {
-    if (inputVal === "") return;
-
-    // type %2C%20playlist
-    const data = await fetch(
-      `https://youtube.googleapis.com/youtube/v3/search?type=video&maxResults=15&q=${inputVal}&part=snippet&key=${process.env.REACT_APP_API_KEY}`
-    );
-    const response = await data.json();
-
-    const newResults: Array<Object> = [];
-    response.items.forEach((result: Object) => {
-      newResults.push(result);
-    });
-
-    setResults(newResults);
-  }
 
   return (
     <div className={styles.Main}>
-      <div className={styles.search}>
-        <input
-          type="text"
-          value={inputVal}
-          onChange={(e) => {
-            setInputVal(e.target.value);
-          }}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") getSearchResults();
-          }}
-        />
-        <button className="button smallButton" onClick={getSearchResults}>
-          <Search className="smallIcon" />
-        </button>
-      </div>
-      <div>
-        {results.map((result, index) => {
-          return (
-            <Video
-              data={result}
-              playVideo={(id) => setNewSource(id)}
-              key={index}
-            />
-          );
-        })}
-      </div>
+      <SearchBar setResults={(results) => setResults(results)} />
+      <SearchResults results={results} setNewSource={setNewSource} />
     </div>
   );
 }
