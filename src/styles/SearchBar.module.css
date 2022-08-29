@@ -18,9 +18,15 @@
 }
 
 .searchInput {
-  max-width: 75%;
+  flex-grow: 1;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
+  background-color: var(--color2);
+}
+
+.searchInput:focus {
+  outline: none;
+  background-color: var(--color3);
 }
 
 .searchButton {
