@@ -1,14 +1,17 @@
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import YouTube from "react-youtube";
 import styles from "../styles/Player.module.css";
 import ProgressBar from "./ProgressBar";
 import { convertSeconds } from "../misc";
 import { PlayFill, PauseFill } from "react-bootstrap-icons";
 
-export default function Player(): JSX.Element {
+interface Props {
+  sourceId: string;
+}
+
+export default function Player({ sourceId }: Props): JSX.Element {
   const [player, setPlayer] = useState<any>(null);
   const [playing, setPlaying] = useState<boolean>(false);
-  const [inputVal, setInputVal] = useState<string>("");
   const [progressBarCurrent, setProgressBarCurrent] = useState<number>(0);
   const [progressBarMax, setProgressBarMax] = useState<number>(0);
   const [progressInterval, setProgressInterval] = useState<NodeJS.Timer>();
@@ -17,6 +20,11 @@ export default function Player(): JSX.Element {
   useEffect(() => {
     player?.setVolume(volume);
   }, [volume]);
+
+  useEffect(() => {
+    if (sourceId.length === 0) return;
+    changeSource(sourceId);
+  }, [sourceId]);
 
   function startProgressTimer(): void {
     setProgressInterval(
@@ -90,7 +98,7 @@ export default function Player(): JSX.Element {
     <div className={styles.Player}>
       <YouTube
         style={{ display: "none" }}
-        videoId={"YdYwICNPDwI"}
+        videoId={""}
         onReady={(e) => onPlayerReady(e)}
         onStateChange={(e) => {
           handleStateChange(e);
@@ -119,15 +127,15 @@ export default function Player(): JSX.Element {
         </p>
       </div>
       <div className={styles.mainControls}>
-        <button className={styles.pauseButton} onClick={handlePause}>
+        <button className="button" onClick={handlePause}>
           {playing ? (
-            <PauseFill className={styles.icon} />
+            <PauseFill className="icon" />
           ) : (
-            <PlayFill className={styles.icon} />
+            <PlayFill className="icon" />
           )}
         </button>
       </div>
-      <div className={styles.volumeControls}>
+      {/* <div className={styles.volumeControls}>
         <button className={styles.muteButton} onClick={handleMute}>
           Toggle Mute
         </button>
@@ -141,21 +149,7 @@ export default function Player(): JSX.Element {
             handleVolumeChange(e);
           }}
         />
-      </div>
-      {/* <input
-        type="text"
-        value={inputVal}
-        onChange={(e) => {
-          setInputVal(e.target.value);
-        }}
-      />
-      <button
-        onClick={() => {
-          changeSource(inputVal);
-        }}
-      >
-        Submit
-      </button> */}
+      </div> */}
     </div>
   );
 }

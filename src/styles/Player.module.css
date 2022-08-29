@@ -19,27 +19,15 @@
   font-size: 16px;
 }
 
+.progressCounters > * {
+  color: var(--color4);
+  font-weight: bold;
+}
+
 .mainControls {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.pauseButton {
-  --button-size: 80px;
-  height: var(--button-size);
-  width: var(--button-size);
-  border: none;
-  background-color: var(--color2);
-  border-radius: 100%;
-  /* padding: 12px; */
-  display: grid;
-  place-items: center;
-  box-shadow: var(--shadow);
-}
-
-.icon {
-  font-size: 48px;
 }
 
 .volumeControls {

@@ -8,8 +8,8 @@ interface Props {
 }
 
 export default function ProgressBar({
-  progress: completed,
-  progressMax: completedMax,
+  progress: progressCurrent,
+  progressMax,
   seekTo,
 }: Props) {
   const barRef = useRef<HTMLDivElement>(null);
@@ -24,14 +24,14 @@ export default function ProgressBar({
     var x = e.clientX - rect.left;
 
     const percentage = x / newTarget.offsetWidth;
-    const seconds = completedMax * percentage;
+    const seconds = progressMax * percentage;
 
     seekTo(seconds);
   }
 
   useEffect(() => {
-    setProgressPercentage((completed / completedMax) * 100);
-  }, [completed]);
+    setProgressPercentage((progressCurrent / progressMax) * 100);
+  }, [progressCurrent]);
 
   return (
     <button className={styles.buttonContainer} onClick={(e) => handleClick(e)}>

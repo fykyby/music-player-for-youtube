@@ -3,6 +3,7 @@
   cursor: pointer;
   width: 100%;
   box-shadow: var(--shadow);
+  height: 8px;
 }
 
 .container {
