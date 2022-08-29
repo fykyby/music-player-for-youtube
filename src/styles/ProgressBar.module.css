@@ -20,7 +20,7 @@
 /* slider track */
 .progressBar::-webkit-slider-runnable-track {
   background-color: var(--color2);
-  border-radius: 0rem;
+  border-radius: 20px;
   height: 10px;
 }
 
@@ -39,7 +39,7 @@
 /* slider track */
 .progressBar::-moz-range-track {
   background-color: var(--color2);
-  border-radius: 0rem;
+  border-radius: 20px;
   height: 10px;
 }
 

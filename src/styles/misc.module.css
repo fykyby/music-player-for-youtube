@@ -9,6 +9,15 @@
   display: grid;
   place-items: center;
   box-shadow: var(--shadow);
+  transition: background-color 0.2s;
+}
+
+.button:focus {
+  outline: 3px solid var(--color3);
+}
+
+.button:active {
+  background-color: var(--color3);
 }
 
 .smallButton {
