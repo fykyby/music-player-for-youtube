@@ -3,6 +3,7 @@ import YouTube from "react-youtube";
 import styles from "../styles/Player.module.css";
 import ProgressBar from "./ProgressBar";
 import { convertSeconds } from "../misc";
+import { PlayFill, PauseFill } from "react-bootstrap-icons";
 
 export default function Player(): JSX.Element {
   const [player, setPlayer] = useState<any>(null);
@@ -88,7 +89,7 @@ export default function Player(): JSX.Element {
   return (
     <div className={styles.Player}>
       <YouTube
-        // style={{ display: "none" }}
+        style={{ display: "none" }}
         videoId={"YdYwICNPDwI"}
         onReady={(e) => onPlayerReady(e)}
         onStateChange={(e) => {
@@ -104,18 +105,44 @@ export default function Player(): JSX.Element {
           },
         }}
       />
-      <button onClick={handlePause}>Pause/Play</button>
-      <button onClick={handleMute}>Toggle Mute</button>
-      <input
-        type="range"
-        value={volume}
-        min={0}
-        max={100}
-        onChange={(e) => {
-          handleVolumeChange(e);
-        }}
-      ></input>
-      <input
+      <ProgressBar
+        progress={progressBarCurrent}
+        progressMax={progressBarMax}
+        seekTo={handleSeek}
+      />
+      <div className={styles.progressCounters}>
+        <p className={styles.progressCurent}>
+          {convertSeconds(progressBarCurrent)}
+        </p>
+        <p className={styles.progressCurent}>
+          {convertSeconds(progressBarMax)}
+        </p>
+      </div>
+      <div className={styles.mainControls}>
+        <button className={styles.pauseButton} onClick={handlePause}>
+          {playing ? (
+            <PauseFill className={styles.icon} />
+          ) : (
+            <PlayFill className={styles.icon} />
+          )}
+        </button>
+      </div>
+      <div className={styles.volumeControls}>
+        <button className={styles.muteButton} onClick={handleMute}>
+          Toggle Mute
+        </button>
+        <input
+          className={styles.volumeSlider}
+          type="range"
+          value={volume}
+          min={0}
+          max={100}
+          onChange={(e) => {
+            handleVolumeChange(e);
+          }}
+        />
+      </div>
+      {/* <input
         type="text"
         value={inputVal}
         onChange={(e) => {
@@ -128,14 +155,7 @@ export default function Player(): JSX.Element {
         }}
       >
         Submit
-      </button>
-      <ProgressBar
-        progress={progressBarCurrent}
-        progressMax={progressBarMax}
-        seekTo={handleSeek}
-      />
-      <p>{convertSeconds(progressBarCurrent)}</p>
-      <p>{convertSeconds(progressBarMax)}</p>
+      </button> */}
     </div>
   );
 }

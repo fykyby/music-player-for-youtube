@@ -11,6 +11,7 @@
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "react": "^18.2.0",
+    "react-bootstrap-icons": "^1.8.4",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "react-youtube": "^9.0.3",

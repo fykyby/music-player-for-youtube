@@ -1,7 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 :root {
-  --color1: #1b2430;
+  --color1: #05121d;
+  --color2: #082032;
+  --color3: #2c394b;
+  --color4: #334756;
+  --shadow: 2px 2px 15px 0px rgba(0, 0, 0, 1);
 }
 
 * {
@@ -13,5 +17,5 @@
 
 body {
   height: 100vh;
-  background-color: var(--color1);
+  background-color: black;
 }

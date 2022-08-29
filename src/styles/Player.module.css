@@ -1,2 +1,47 @@
 .Player {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background-color: var(--color1);
+  padding-bottom: 16px;
+}
+
+.progressCounters {
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+  margin-top: -4px;
+  margin-bottom: -20px;
+  font-size: 16px;
+}
+
+.mainControls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pauseButton {
+  --button-size: 80px;
+  height: var(--button-size);
+  width: var(--button-size);
+  border: none;
+  background-color: var(--color2);
+  border-radius: 100%;
+  /* padding: 12px; */
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow);
+}
+
+.icon {
+  font-size: 48px;
+}
+
+.volumeControls {
+  display: none;
 }
