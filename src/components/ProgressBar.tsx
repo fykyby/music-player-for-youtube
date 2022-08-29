@@ -15,29 +15,6 @@ export default function ProgressBar({
   const barRef = useRef<HTMLDivElement>(null);
   const [progressPercentage, setProgressPercentage] = useState<number>(0);
 
-  // useEffect(() => {
-  //   function handleClick(e: any): void {
-  //     let newTarget = e.target;
-  //     if (e.target.children.length === 0) {
-  //       newTarget = e.target.parentNode;
-  //     }
-  //     var rect = newTarget?.getBoundingClientRect();
-  //     var x = e.clientX - rect.left;
-
-  //     const percentage = x / newTarget.offsetWidth;
-  //     const seconds = completedMax * percentage;
-
-  //     seekTo(seconds);
-  //   }
-
-  //   const current = barRef.current;
-  //   current?.addEventListener("click", handleClick);
-
-  //   return () => {
-  //     current?.removeEventListener("click", handleClick);
-  //   };
-  // }, [completedMax]);
-
   function handleClick(e: any): void {
     let newTarget = e.target;
     if (e.target.children.length === 0) {
