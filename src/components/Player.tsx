@@ -24,6 +24,7 @@ export default function Player({ sourceId }: Props): JSX.Element {
   useEffect(() => {
     if (sourceId.length === 0) return;
     changeSource(sourceId);
+    setProgressTime(0);
   }, [sourceId]);
 
   function startProgressTimer(): void {
@@ -89,9 +90,9 @@ export default function Player({ sourceId }: Props): JSX.Element {
     player.loadVideoById(id);
   }
 
-  function handleVolumeChange(e: any): void {
-    setVolume(e.target.value);
-  }
+  // function handleVolumeChange(e: any): void {
+  //   setVolume(e.target.value);
+  // }
 
   // https://developers.google.com/youtube/iframe_api_reference
   return (

@@ -15,8 +15,9 @@ export default function Main({ setNewSource }: Props): JSX.Element {
   async function getSearchResults() {
     if (inputVal === "") return;
 
+    // type %2C%20playlist
     const data = await fetch(
-      `https://youtube.googleapis.com/youtube/v3/search?type=video%2C%20playlist&maxResults=15&q=${inputVal}&part=snippet&key=${process.env.REACT_APP_API_KEY}`
+      `https://youtube.googleapis.com/youtube/v3/search?type=video&maxResults=15&q=${inputVal}&part=snippet&key=${process.env.REACT_APP_API_KEY}`
     );
     const response = await data.json();
 
@@ -24,8 +25,6 @@ export default function Main({ setNewSource }: Props): JSX.Element {
     response.items.forEach((result: Object) => {
       newResults.push(result);
     });
-
-    console.log(newResults);
 
     setResults(newResults);
   }
@@ -49,7 +48,13 @@ export default function Main({ setNewSource }: Props): JSX.Element {
       </div>
       <div>
         {results.map((result, index) => {
-          return <Video data={result} key={index} />;
+          return (
+            <Video
+              data={result}
+              playVideo={(id) => setNewSource(id)}
+              key={index}
+            />
+          );
         })}
       </div>
     </div>
