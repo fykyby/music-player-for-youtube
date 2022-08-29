@@ -1,8 +1,12 @@
+.buttonContainer {
+  border: none;
+  cursor: pointer;
+}
+
 .container {
   width: 500px;
   height: 10px;
   background-color: black;
-  border-radius: 50px;
 }
 
 .filler {

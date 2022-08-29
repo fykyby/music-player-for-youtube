@@ -7,7 +7,7 @@ export default function Player(): JSX.Element {
   const [player, setPlayer] = useState<any>(null);
   const [playing, setPlaying] = useState<boolean>(false);
   const [inputVal, setInputVal] = useState<string>("");
-  const [progressBarCompleted, setProgressBarCompleted] = useState<number>(0);
+  const [progressBarCurrent, setProgressBarCompleted] = useState<number>(0);
   const [progressBarMax, setProgressBarMax] = useState<number>(0);
   const [progressInterval, setProgressInterval] = useState<NodeJS.Timer>();
 
@@ -16,20 +16,20 @@ export default function Player(): JSX.Element {
   //   setCurrentTime();
   // }
 
-  function startProgressTimer() {
+  function startProgressTimer(): void {
     setProgressInterval(
       setInterval(() => {
-        setCurrentTime();
-      }, 1000)
+        setProgressTime(player.getCurrentTime());
+      }, 2000)
     );
   }
 
-  function clearProgressTimer() {
+  function clearProgressTimer(): void {
     clearInterval(progressInterval);
   }
 
-  function setCurrentTime() {
-    setProgressBarCompleted(player.getCurrentTime());
+  function setProgressTime(seconds: number): void {
+    setProgressBarCompleted(seconds);
   }
 
   function onPlayerReady(e: any): void {
@@ -58,9 +58,16 @@ export default function Player(): JSX.Element {
   function handleStateChange(e: any): void {
     if (e.data === 1) {
       setPlaying(true);
+      startProgressTimer();
     } else {
       setPlaying(false);
+      clearProgressTimer();
     }
+  }
+
+  function handleSeek(seconds: number): void {
+    player.seekTo(Math.floor(seconds), true);
+    setProgressTime(seconds);
   }
 
   // https://developers.google.com/youtube/iframe_api_reference
@@ -73,8 +80,8 @@ export default function Player(): JSX.Element {
         onStateChange={(e) => {
           handleStateChange(e);
         }}
-        onPause={clearProgressTimer}
-        onPlay={startProgressTimer}
+        // onPause={clearProgressTimer}
+        // onPlay={startProgressTimer}
         opts={{
           allow: "autoplay",
           playerVars: {
@@ -100,10 +107,11 @@ export default function Player(): JSX.Element {
         Submit
       </button>
       <ProgressBar
-        completed={progressBarCompleted}
-        completedMax={progressBarMax}
+        progress={progressBarCurrent}
+        progressMax={progressBarMax}
+        seekTo={handleSeek}
       />
-      <p>{progressBarCompleted}</p>
+      <p>{progressBarCurrent}</p>
       <p>{progressBarMax}</p>
     </div>
   );
