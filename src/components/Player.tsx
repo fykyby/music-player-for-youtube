@@ -99,15 +99,6 @@ export default function Player(): JSX.Element {
       >
         Submit
       </button>
-      {/* <ProgressBar
-        completed={progressBarCompleted}
-        maxCompleted={progressBarMax}
-        customLabel=" "
-        bgColor="black"
-        baseBgColor="gray"
-        height="10px"
-        transitionDuration="0s"
-      /> */}
       <ProgressBar
         completed={progressBarCompleted}
         completedMax={progressBarMax}

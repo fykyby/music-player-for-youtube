@@ -13,21 +13,6 @@ export default function ProgressBar({ completed, completedMax }: Props) {
     setProgressPercentage((completed / completedMax) * 100);
   }, [completed]);
 
-  // const containerStyles = {
-  //   height: 20,
-  //   width: "20rem",
-  //   backgroundColor: "black",
-  //   borderRadius: 50,
-  //   margin: 50,
-  // };
-
-  // const fillerStyles = {
-  //   height: "100%",
-  //   width: `${progressPercentage}%`,
-  //   backgroundColor: "white",
-  //   borderRadius: "inherit",
-  // };
-
   return (
     <div className={styles.container}>
       <div
