@@ -11,6 +11,11 @@ export default function Player(): JSX.Element {
   const [progressBarCurrent, setProgressBarCurrent] = useState<number>(0);
   const [progressBarMax, setProgressBarMax] = useState<number>(0);
   const [progressInterval, setProgressInterval] = useState<NodeJS.Timer>();
+  const [volume, setVolume] = useState<number>(20);
+
+  useEffect(() => {
+    player?.setVolume(volume);
+  }, [volume]);
 
   function startProgressTimer(): void {
     setProgressInterval(
@@ -31,6 +36,7 @@ export default function Player(): JSX.Element {
   function onPlayerReady(e: any): void {
     setPlayer(e.target);
     setProgressBarMax(e.target.getDuration());
+    e.target.setVolume(volume);
     e.target.playVideo();
     e.target.seekTo(0);
   }
@@ -74,6 +80,10 @@ export default function Player(): JSX.Element {
     player.loadVideoById(id);
   }
 
+  function handleVolumeChange(e: any): void {
+    setVolume(e.target.value);
+  }
+
   // https://developers.google.com/youtube/iframe_api_reference
   return (
     <div className={styles.Player}>
@@ -96,6 +106,15 @@ export default function Player(): JSX.Element {
       />
       <button onClick={handlePause}>Pause/Play</button>
       <button onClick={handleMute}>Toggle Mute</button>
+      <input
+        type="range"
+        value={volume}
+        min={0}
+        max={100}
+        onChange={(e) => {
+          handleVolumeChange(e);
+        }}
+      ></input>
       <input
         type="text"
         value={inputVal}
