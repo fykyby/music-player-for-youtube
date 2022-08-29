@@ -45,7 +45,7 @@
 
 /* slider thumb */
 .progressBar::-moz-range-thumb {
-  background-color: #ff0000;
+  background-color: var(--color4);
   border: none; /*Removes extra border that FF applies*/
   border-radius: 100%;
   height: 18px;
