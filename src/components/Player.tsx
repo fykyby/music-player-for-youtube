@@ -2,12 +2,13 @@ import { useRef, useEffect, useState } from "react";
 import YouTube from "react-youtube";
 import styles from "../styles/Player.module.css";
 import ProgressBar from "./ProgressBar";
+import { convertSeconds } from "../misc";
 
 export default function Player(): JSX.Element {
   const [player, setPlayer] = useState<any>(null);
   const [playing, setPlaying] = useState<boolean>(false);
   const [inputVal, setInputVal] = useState<string>("");
-  const [progressBarCurrent, setProgressBarCompleted] = useState<number>(0);
+  const [progressBarCurrent, setProgressBarCurrent] = useState<number>(0);
   const [progressBarMax, setProgressBarMax] = useState<number>(0);
   const [progressInterval, setProgressInterval] = useState<NodeJS.Timer>();
 
@@ -15,7 +16,7 @@ export default function Player(): JSX.Element {
     setProgressInterval(
       setInterval(() => {
         setProgressTime(player.getCurrentTime());
-      }, 2000)
+      }, 1000)
     );
   }
 
@@ -24,7 +25,7 @@ export default function Player(): JSX.Element {
   }
 
   function setProgressTime(seconds: number): void {
-    setProgressBarCompleted(seconds);
+    setProgressBarCurrent(seconds);
   }
 
   function onPlayerReady(e: any): void {
@@ -51,6 +52,10 @@ export default function Player(): JSX.Element {
   }
 
   function handleStateChange(e: any): void {
+    if (e.target.getDuration() !== progressBarMax) {
+      setProgressBarMax(e.target.getDuration());
+    }
+
     if (e.data === 1) {
       setPlaying(true);
     } else {
@@ -62,6 +67,10 @@ export default function Player(): JSX.Element {
     clearProgressTimer();
     player.seekTo(Math.floor(seconds), true);
     setProgressTime(seconds);
+  }
+
+  function changeSource(id: string): void {
+    player.loadVideoById(id);
   }
 
   // https://developers.google.com/youtube/iframe_api_reference
@@ -95,7 +104,7 @@ export default function Player(): JSX.Element {
       />
       <button
         onClick={() => {
-          player.loadVideoById(inputVal);
+          changeSource(inputVal);
         }}
       >
         Submit
@@ -105,8 +114,8 @@ export default function Player(): JSX.Element {
         progressMax={progressBarMax}
         seekTo={handleSeek}
       />
-      <p>{progressBarCurrent}</p>
-      <p>{progressBarMax}</p>
+      <p>{convertSeconds(progressBarCurrent)}</p>
+      <p>{convertSeconds(progressBarMax)}</p>
     </div>
   );
 }
