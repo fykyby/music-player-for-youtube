@@ -53,6 +53,7 @@ export default function Player(): JSX.Element {
 
   function handleStateChange(e: any): void {
     if (e.target.getDuration() !== progressBarMax) {
+      e.target.seekTo(0);
       setProgressBarMax(e.target.getDuration());
     }
 
