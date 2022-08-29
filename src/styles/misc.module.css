@@ -1,0 +1,34 @@
+.button {
+  --button-size-big: 80px;
+  --button-size-small: 48px;
+  height: var(--button-size-big);
+  width: var(--button-size-big);
+  border: none;
+  background-color: var(--color2);
+  border-radius: 100%;
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow);
+}
+
+.smallButton {
+  height: var(--button-size-small);
+  width: var(--button-size-small);
+}
+
+.icon {
+  font-size: 48px;
+}
+
+.smallIcon {
+  font-size: 20px;
+}
+
+.textInput {
+  border: none;
+  box-shadow: var(--shadow);
+  height: 48px;
+  background-color: var(--color3);
+  border-radius: 28px;
+  padding-inline: 16px;
+}

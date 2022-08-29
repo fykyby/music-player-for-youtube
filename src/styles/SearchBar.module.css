@@ -2,15 +2,28 @@
   position: sticky;
   top: 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background-color: var(--color1);
-  height: 52px;
+  height: 64px;
   box-shadow: var(--shadow);
-  padding-inline: 20px;
+  padding-inline: 10px;
 }
 
-.search input {
-  width: 300px;
+.inputContainer {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  width: 100%;
+}
+
+.searchInput {
   max-width: 75%;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.searchButton {
+  border-top-left-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
 }

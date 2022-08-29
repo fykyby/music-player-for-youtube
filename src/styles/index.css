@@ -19,39 +19,3 @@ body {
   height: 100vh;
   background-color: var(--color2);
 }
-
-.button {
-  --button-size-big: 80px;
-  --button-size-small: 40px;
-  height: var(--button-size-big);
-  width: var(--button-size-big);
-  border: none;
-  background-color: var(--color2);
-  border-radius: 100%;
-  display: grid;
-  place-items: center;
-  box-shadow: var(--shadow);
-}
-
-.smallButton {
-  height: var(--button-size-small);
-  width: var(--button-size-small);
-}
-
-.icon {
-  font-size: 48px;
-}
-
-.smallIcon {
-  font-size: 20px;
-}
-
-input[type="text"],
-input[type="search"] {
-  border: none;
-  box-shadow: var(--shadow);
-  height: 32px;
-  background-color: var(--color3);
-  border-radius: 28px;
-  padding-inline: 10px;
-}

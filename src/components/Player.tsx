@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import YouTube from "react-youtube";
 import styles from "../styles/Player.module.css";
+import miscStyles from "../styles/misc.module.css";
 import ProgressBar from "./ProgressBar";
 import { convertSeconds } from "../misc";
 import { PlayFill, PauseFill } from "react-bootstrap-icons";
@@ -128,11 +129,11 @@ export default function Player({ sourceId }: Props): JSX.Element {
         </p>
       </div>
       <div className={styles.mainControls}>
-        <button className="button" onClick={handlePause}>
+        <button className={miscStyles.button} onClick={handlePause}>
           {playing ? (
-            <PauseFill className="icon" />
+            <PauseFill className={miscStyles.icon} />
           ) : (
-            <PlayFill className="icon" />
+            <PlayFill className={miscStyles.icon} />
           )}
         </button>
       </div>

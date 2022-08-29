@@ -1,20 +1,53 @@
-.buttonContainer {
-  border: none;
+.barContainer {
+  width: 100%;
+}
+
+/*********** Baseline, reset styles ***********/
+.progressBar {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
   cursor: pointer;
   width: 100%;
-  box-shadow: var(--shadow);
-  height: 8px;
 }
 
-.container {
-  width: 100%;
-  height: 8px;
-  background-color: var(--color3);
+/* Removes default focus */
+.progressBar:focus {
+  outline: none;
 }
 
-.filler {
-  height: 100%;
-  width: 0;
+/******** Chrome, Safari, Opera and Edge Chromium styles ********/
+/* slider track */
+.progressBar::-webkit-slider-runnable-track {
   background-color: var(--color2);
-  border-radius: inherit;
+  border-radius: 0rem;
+  height: 10px;
+}
+
+/* slider thumb */
+.progressBar::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  margin-top: -4px; /* Centers thumb on the track */
+  background-color: var(--color4);
+  border-radius: 100%;
+  height: 18px;
+  width: 18px;
+}
+
+/*********** Firefox styles ***********/
+/* slider track */
+.progressBar::-moz-range-track {
+  background-color: var(--color2);
+  border-radius: 0rem;
+  height: 10px;
+}
+
+/* slider thumb */
+.progressBar::-moz-range-thumb {
+  background-color: #ff0000;
+  border: none; /*Removes extra border that FF applies*/
+  border-radius: 100%;
+  height: 18px;
+  width: 18px;
 }

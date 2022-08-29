@@ -1,4 +1,3 @@
-import { useRef, useEffect, useState } from "react";
 import styles from "../styles/ProgressBar.module.css";
 
 interface Props {
@@ -12,35 +11,22 @@ export default function ProgressBar({
   progressMax,
   seekTo,
 }: Props) {
-  const barRef = useRef<HTMLDivElement>(null);
-  const [progressPercentage, setProgressPercentage] = useState<number>(0);
-
-  function handleClick(e: any): void {
-    let newTarget = e.target;
-    if (e.target.children.length === 0) {
-      newTarget = e.target.parentNode;
-    }
-    var rect = newTarget?.getBoundingClientRect();
-    var x = e.clientX - rect.left;
-
-    const percentage = x / newTarget.offsetWidth;
-    const seconds = progressMax * percentage;
-
-    seekTo(seconds);
+  function handleChange(e: any) {
+    seekTo(e.target.value);
   }
 
-  useEffect(() => {
-    setProgressPercentage((progressCurrent / progressMax) * 100);
-  }, [progressCurrent]);
-
   return (
-    <button className={styles.buttonContainer} onClick={(e) => handleClick(e)}>
-      <div className={styles.container} ref={barRef}>
-        <div
-          className={styles.filler}
-          style={{ width: `${progressPercentage}%` }}
-        ></div>
-      </div>
-    </button>
+    <div className={styles.barContainer}>
+      <input
+        className={styles.progressBar}
+        type="range"
+        value={progressCurrent}
+        min={0}
+        max={progressMax}
+        onChange={(e) => {
+          handleChange(e);
+        }}
+      />
+    </div>
   );
 }
