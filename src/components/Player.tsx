@@ -11,11 +11,6 @@ export default function Player(): JSX.Element {
   const [progressBarMax, setProgressBarMax] = useState<number>(0);
   const [progressInterval, setProgressInterval] = useState<NodeJS.Timer>();
 
-  // ON SEEK
-  // if (e.target.getCurrentTime() !== progressBarCompleted) {
-  //   setCurrentTime();
-  // }
-
   function startProgressTimer(): void {
     setProgressInterval(
       setInterval(() => {
