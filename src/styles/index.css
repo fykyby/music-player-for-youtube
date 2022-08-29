@@ -46,7 +46,8 @@ body {
   font-size: 20px;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="search"] {
   border: none;
   box-shadow: var(--shadow);
   height: 32px;

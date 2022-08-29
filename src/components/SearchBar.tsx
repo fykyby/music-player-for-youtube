@@ -29,7 +29,7 @@ export default function SearchBar({ setResults }: Props): JSX.Element {
   return (
     <div className={styles.search}>
       <input
-        type="text"
+        type="search"
         value={inputVal}
         onChange={(e) => {
           setInputVal(e.target.value);
