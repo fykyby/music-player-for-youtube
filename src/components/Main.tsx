@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/Main.module.css";
 import { Search } from "react-bootstrap-icons";
+import Video from "./Video";
 
 interface Props {
   setNewSource(id: string): void;
@@ -11,15 +12,11 @@ export default function Main({ setNewSource }: Props): JSX.Element {
   const [inputVal, setInputVal] = useState<string>("");
   const [results, setResults] = useState<Array<Object>>([]);
 
-  useEffect(() => {
-    console.log(results);
-  }, [results]);
-
   async function getSearchResults() {
     if (inputVal === "") return;
 
     const data = await fetch(
-      `https://youtube.googleapis.com/youtube/v3/search?maxResults=10&q=killing%20my%20love&part=snippet&key=${process.env.REACT_APP_API_KEY}`
+      `https://youtube.googleapis.com/youtube/v3/search?type=video%2C%20playlist&maxResults=15&q=${inputVal}&part=snippet&key=${process.env.REACT_APP_API_KEY}`
     );
     const response = await data.json();
 
@@ -44,7 +41,11 @@ export default function Main({ setNewSource }: Props): JSX.Element {
           <Search className="smallIcon" />
         </button>
       </div>
-      <div></div>
+      <div>
+        {results.map((result, index) => {
+          return <Video data={result} key={index} />;
+        })}
+      </div>
     </div>
   );
 }

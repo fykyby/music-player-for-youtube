@@ -1,10 +1,12 @@
 .Main {
   display: flex;
   flex-direction: column;
+  padding-bottom: 140px;
 }
 
 .search {
   position: sticky;
+  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
