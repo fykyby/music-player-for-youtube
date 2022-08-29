@@ -3,7 +3,7 @@
   justify-content: start;
   align-items: center;
   gap: 10px;
-  height: 48px;
+  height: 64px;
   border-bottom: 1px solid var(--color1);
 }
 
@@ -11,6 +11,23 @@
   height: 100%;
 }
 
-.title {
+.info {
   overflow: hidden;
+  padding-right: 10px;
+}
+
+.title {
+  font-size: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.channel {
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color4);
+  font-weight: bold;
 }

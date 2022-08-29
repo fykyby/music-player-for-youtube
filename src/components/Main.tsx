@@ -24,6 +24,9 @@ export default function Main({ setNewSource }: Props): JSX.Element {
     response.items.forEach((result: Object) => {
       newResults.push(result);
     });
+
+    console.log(newResults);
+
     setResults(newResults);
   }
 
@@ -35,6 +38,9 @@ export default function Main({ setNewSource }: Props): JSX.Element {
           value={inputVal}
           onChange={(e) => {
             setInputVal(e.target.value);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") getSearchResults();
           }}
         />
         <button className="button smallButton" onClick={getSearchResults}>

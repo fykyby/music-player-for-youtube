@@ -8,7 +8,10 @@ export default function Video({ data }: Props): JSX.Element {
   return (
     <div className={styles.Video}>
       <img src={data.snippet.thumbnails.default.url} alt="thumbnail" />
-      <div className={styles.title}>{data.snippet.title}</div>
+      <div className={styles.info}>
+        <div className={styles.title}>{data.snippet.title}</div>
+        <div className={styles.channel}>{data.snippet.channelTitle}</div>
+      </div>
     </div>
   );
 }
