@@ -53,14 +53,13 @@ export default function Player(): JSX.Element {
   function handleStateChange(e: any): void {
     if (e.data === 1) {
       setPlaying(true);
-      startProgressTimer();
     } else {
       setPlaying(false);
-      clearProgressTimer();
     }
   }
 
   function handleSeek(seconds: number): void {
+    clearProgressTimer();
     player.seekTo(Math.floor(seconds), true);
     setProgressTime(seconds);
   }
@@ -75,8 +74,8 @@ export default function Player(): JSX.Element {
         onStateChange={(e) => {
           handleStateChange(e);
         }}
-        // onPause={clearProgressTimer}
-        // onPlay={startProgressTimer}
+        onPause={clearProgressTimer}
+        onPlay={startProgressTimer}
         opts={{
           allow: "autoplay",
           playerVars: {
