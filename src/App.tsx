@@ -13,7 +13,7 @@ export default function App(): JSX.Element {
 
   return (
     <div className={styles.App}>
-      <Main setNewSource={setNewSource} />
+      <Main setNewSource={setNewSource} currentSource={currentSource} />
       <Player sourceId={currentSource} />
     </div>
   );

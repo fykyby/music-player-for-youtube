@@ -4,11 +4,13 @@ import styles from "../styles/SearchResults.module.css";
 interface Props {
   results: Array<any>;
   setNewSource(id: string): void;
+  currentSource: string;
 }
 
 export default function SearchResults({
   results,
   setNewSource,
+  currentSource,
 }: Props): JSX.Element {
   return (
     <div className={styles.SearchResults}>
@@ -18,6 +20,7 @@ export default function SearchResults({
             data={result}
             playVideo={(id) => setNewSource(id)}
             key={index}
+            currentSource={currentSource}
           />
         );
       })}

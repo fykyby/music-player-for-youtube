@@ -43,3 +43,7 @@
   color: var(--color4);
   font-weight: bold;
 }
+
+.playing {
+  background-color: var(--color1);
+}
