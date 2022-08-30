@@ -13,9 +13,8 @@ export default function SearchBar({ setResults }: Props): JSX.Element {
   async function getSearchResults() {
     if (inputVal === "") return;
 
-    // type %2C%20playlist
     const data = await fetch(
-      `https://youtube.googleapis.com/youtube/v3/search?type=video&maxResults=15&q=${inputVal}&part=snippet&key=${process.env.REACT_APP_API_KEY}`
+      `https://youtube.googleapis.com/youtube/v3/search?type=video&type=playlist&maxResults=15&q=${inputVal}&part=snippet&key=${process.env.REACT_APP_API_KEY}`
     );
     const response = await data.json();
 

@@ -1,4 +1,4 @@
-import Video from "./Video";
+import Result from "./Result";
 import styles from "../styles/SearchResults.module.css";
 
 interface Props {
@@ -16,7 +16,7 @@ export default function SearchResults({
     <div className={styles.SearchResults}>
       {results.map((result, index) => {
         return (
-          <Video
+          <Result
             data={result}
             playVideo={(id) => setNewSource(id)}
             key={index}

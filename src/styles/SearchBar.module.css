@@ -8,6 +8,7 @@
   height: 64px;
   box-shadow: var(--shadow);
   padding-inline: 10px;
+  z-index: 5;
 }
 
 .inputContainer {

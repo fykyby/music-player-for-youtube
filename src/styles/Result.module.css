@@ -19,8 +19,28 @@
   background-color: var(--color3);
 }
 
+.thumbnailContainer {
+  position: relative;
+  height: 100%;
+}
+
 .Video img {
   height: 100%;
+}
+
+.playlistThumbnail {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  color: white;
+  font-size: 36px;
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 100%;
+  padding-inline: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .info {

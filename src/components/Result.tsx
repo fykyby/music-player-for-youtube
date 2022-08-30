@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import styles from "../styles/Video.module.css";
+import styles from "../styles/Result.module.css";
+import miscStyles from "../styles/misc.module.css";
+import { MusicNoteList } from "react-bootstrap-icons";
 
 interface Props {
   data: any;
@@ -7,7 +9,7 @@ interface Props {
   currentSource: string;
 }
 
-export default function Video({
+export default function Result({
   data,
   playVideo,
   currentSource,
@@ -25,8 +27,9 @@ export default function Video({
   function handleClick(e: any): void {
     if (data.id.kind === "youtube#video") {
       playVideo(data.id.videoId);
-    } else {
+    } else if (data.id.kind === "youtube#playlist") {
       // handle playlists/channels
+      console.log(data);
     }
   }
 
@@ -35,7 +38,12 @@ export default function Video({
       className={`${styles.Video} ${playing ? styles.playing : null}`}
       onClick={(e) => handleClick(e)}
     >
-      <img src={data.snippet.thumbnails.default.url} alt="thumbnail" />
+      <div className={styles.thumbnailContainer}>
+        <img src={data.snippet.thumbnails.default.url} alt="thumbnail" />
+        {data.id.kind === "youtube#playlist" ? (
+          <MusicNoteList className={styles.playlistThumbnail} />
+        ) : null}
+      </div>
       <div className={styles.info}>
         <div className={styles.title}>{data.snippet.title}</div>
         <div className={styles.channel}>{data.snippet.channelTitle}</div>
