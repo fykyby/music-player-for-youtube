@@ -5,6 +5,18 @@
   gap: 10px;
   height: 64px;
   border-bottom: 1px solid var(--color1);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: background-color 0.1s;
+}
+
+.Video:hover {
+  background-color: var(--color1);
+}
+
+.Video:active {
+  background-color: var(--color3);
 }
 
 .Video img {
