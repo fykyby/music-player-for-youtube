@@ -4,7 +4,14 @@ import styles from "../styles/Player.module.css";
 import miscStyles from "../styles/misc.module.css";
 import ProgressBar from "./ProgressBar";
 import { convertSeconds } from "../misc";
-import { PlayFill, PauseFill } from "react-bootstrap-icons";
+import {
+  PlayFill,
+  PauseFill,
+  CaretLeftFill,
+  CaretRightFill,
+  ArrowRepeat,
+  Shuffle,
+} from "react-bootstrap-icons";
 
 interface Props {
   sourceId: string;
@@ -16,6 +23,7 @@ export default function Player({ sourceId }: Props): JSX.Element {
   const [progressBarCurrent, setProgressBarCurrent] = useState<number>(0);
   const [progressBarMax, setProgressBarMax] = useState<number>(0);
   const [progressInterval, setProgressInterval] = useState<NodeJS.Timer>();
+  const [repeat, setRepeat] = useState<number>(0); // 0 - no repeat, 1 - repeat playlist, 2 - repeat song
   const [volume, setVolume] = useState<number>(20);
 
   useEffect(() => {
@@ -68,6 +76,16 @@ export default function Player({ sourceId }: Props): JSX.Element {
     }
   }
 
+  function handleRepeat(): void {
+    if (repeat === 0) {
+      setRepeat(1);
+    } else if (repeat === 1) {
+      setRepeat(2);
+    } else {
+      setRepeat(0);
+    }
+  }
+
   function handleStateChange(e: any): void {
     if (e.target.getDuration() !== progressBarMax) {
       e.target.seekTo(0);
@@ -87,6 +105,14 @@ export default function Player({ sourceId }: Props): JSX.Element {
     setProgressTime(seconds);
   }
 
+  function handleEnd(): void {
+    if (repeat === 1) {
+      // Repeat playlist
+    } else if (repeat === 2) {
+      player.playVideo();
+    }
+  }
+
   function changeSource(id: string): void {
     player.loadVideoById(id);
   }
@@ -95,7 +121,6 @@ export default function Player({ sourceId }: Props): JSX.Element {
   //   setVolume(e.target.value);
   // }
 
-  // https://developers.google.com/youtube/iframe_api_reference
   return (
     <div className={styles.Player}>
       <YouTube
@@ -107,6 +132,7 @@ export default function Player({ sourceId }: Props): JSX.Element {
         }}
         onPause={clearProgressTimer}
         onPlay={startProgressTimer}
+        onEnd={handleEnd}
         opts={{
           allow: "autoplay",
           playerVars: {
@@ -129,12 +155,38 @@ export default function Player({ sourceId }: Props): JSX.Element {
         </p>
       </div>
       <div className={styles.mainControls}>
+        <button
+          className={`${miscStyles.button} ${miscStyles.smallButton}`}
+          onClick={() => {}}
+        >
+          <Shuffle className={miscStyles.smallIcon} />
+        </button>
+        <button
+          className={`${miscStyles.button} ${miscStyles.smallButton}`}
+          onClick={() => {}}
+        >
+          <CaretLeftFill className={miscStyles.smallIcon} />
+        </button>
         <button className={miscStyles.button} onClick={handlePause}>
           {playing ? (
             <PauseFill className={miscStyles.icon} />
           ) : (
             <PlayFill className={miscStyles.icon} />
           )}
+        </button>
+        <button
+          className={`${miscStyles.button} ${miscStyles.smallButton}`}
+          onClick={() => {}}
+        >
+          <CaretRightFill className={miscStyles.smallIcon} />
+        </button>
+        <button
+          className={`${miscStyles.button} ${miscStyles.smallButton} 
+          ${repeat !== 0 ? styles.buttonActive : null}`}
+          onClick={handleRepeat}
+        >
+          <ArrowRepeat className={miscStyles.smallIcon} />
+          {repeat === 2 ? <div className={styles.repeatVal}>1</div> : null}
         </button>
       </div>
       {/* <div className={styles.volumeControls}>
