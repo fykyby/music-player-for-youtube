@@ -15,7 +15,7 @@ import {
 import { Source } from "../App";
 
 interface Props {
-  currentPlaylist: Array<any>;
+  currentPlaylist: Array<Source>;
 }
 
 export default function Player({ currentPlaylist }: Props): JSX.Element {
@@ -26,6 +26,7 @@ export default function Player({ currentPlaylist }: Props): JSX.Element {
   const [progressInterval, setProgressInterval] = useState<NodeJS.Timer>();
   const [repeat, setRepeat] = useState<number>(0); // 0 - no repeat, 1 - repeat playlist, 2 - repeat song
   const [volume, setVolume] = useState<number>(20);
+  const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
 
   useEffect(() => {
     player?.setVolume(volume);
@@ -34,9 +35,9 @@ export default function Player({ currentPlaylist }: Props): JSX.Element {
   useEffect(() => {
     if (currentPlaylist.length === 0) return;
     const newSource = currentPlaylist[0];
+    setCurrentSongIndex(0);
     if (!newSource) return;
     changeSource(newSource.id);
-    setProgressTime(0);
   }, [currentPlaylist]);
 
   function startProgressTimer(): void {
@@ -110,13 +111,48 @@ export default function Player({ currentPlaylist }: Props): JSX.Element {
 
   function handleEnd(): void {
     if (repeat === 1) {
-      // Repeat playlist
+      if (currentPlaylist.length - 1 === currentSongIndex) {
+        restartPlaylist();
+      }
     } else if (repeat === 2) {
       player.playVideo();
     }
   }
 
+  function handleNext(): void {
+    if (currentPlaylist.length - 1 === currentSongIndex) {
+      restartPlaylist();
+    } else {
+      const newSource = currentPlaylist[currentSongIndex + 1];
+      setCurrentSongIndex((prev) => prev + 1);
+      changeSource(newSource.id);
+    }
+  }
+
+  function restartPlaylist(): void {
+    const newSource = currentPlaylist[0];
+    setCurrentSongIndex(0);
+    changeSource(newSource.id);
+  }
+
+  function handlePrevious(): void {
+    if (progressBarCurrent > 4) {
+      handleSeek(0);
+    } else {
+      if (0 === currentSongIndex) {
+        const newSource = currentPlaylist[currentPlaylist.length - 1];
+        setCurrentSongIndex(currentPlaylist.length - 1);
+        changeSource(newSource.id);
+      } else {
+        const newSource = currentPlaylist[currentSongIndex - 1];
+        setCurrentSongIndex((prev) => prev - 1);
+        changeSource(newSource.id);
+      }
+    }
+  }
+
   function changeSource(id: string): void {
+    setProgressTime(0);
     player.loadVideoById(id);
   }
 
@@ -166,7 +202,7 @@ export default function Player({ currentPlaylist }: Props): JSX.Element {
         </button>
         <button
           className={`${miscStyles.button} ${miscStyles.smallButton}`}
-          onClick={() => {}}
+          onClick={handlePrevious}
         >
           <CaretLeftFill className={miscStyles.smallIcon} />
         </button>
@@ -179,13 +215,14 @@ export default function Player({ currentPlaylist }: Props): JSX.Element {
         </button>
         <button
           className={`${miscStyles.button} ${miscStyles.smallButton}`}
-          onClick={() => {}}
+          onClick={handleNext}
         >
           <CaretRightFill className={miscStyles.smallIcon} />
         </button>
         <button
           className={`${miscStyles.button} ${miscStyles.smallButton} 
-          ${repeat !== 0 ? styles.buttonActive : null}`}
+          ${repeat !== 0 ? styles.buttonActive : null}
+          `}
           onClick={handleRepeat}
         >
           <ArrowRepeat className={miscStyles.smallIcon} />

@@ -20,7 +20,6 @@ export default function App(): JSX.Element {
 
   function setNewSource(data: Array<Source>): void {
     setCurrentPlaylist(data);
-    console.log(data);
   }
 
   return (
