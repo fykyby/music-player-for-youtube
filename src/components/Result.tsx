@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/Result.module.css";
-import miscStyles from "../styles/misc.module.css";
 import { MusicNoteList } from "react-bootstrap-icons";
+import { Source } from "../App";
 
 interface Props {
   data: any;
-  playVideo(id: string): void;
-  currentSource: string;
+  setNewSource(data: Source): void;
+  currentSource: Source | undefined;
 }
 
 export default function Result({
   data,
-  playVideo,
+  setNewSource,
   currentSource,
 }: Props): JSX.Element {
   const [playing, setPlaying] = useState(false);
@@ -26,7 +26,13 @@ export default function Result({
 
   function handleClick(e: any): void {
     if (data.id.kind === "youtube#video") {
-      playVideo(data.id.videoId);
+      const newSource = {
+        id: data.id.videoId,
+        title: data.snippet.title,
+        channelTitle: data.snippet.channelTitle,
+        thumbnail: data.snippet.thumbnails.default.url,
+      };
+      setNewSource(newSource);
     } else if (data.id.kind === "youtube#playlist") {
       // handle playlists/channels
       console.log(data);

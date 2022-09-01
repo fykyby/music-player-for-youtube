@@ -2,10 +2,11 @@ import { useState } from "react";
 import styles from "../styles/Main.module.css";
 import SearchBar from "./SearchBar";
 import SearchResults from "./SearchResults";
+import { Source } from "../App";
 
 interface Props {
-  setNewSource(id: string): void;
-  currentSource: string;
+  setNewSource(data: Source): void;
+  currentSource: Source | undefined;
 }
 
 // setNewSource("YdYwICNPDwI");

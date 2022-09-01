@@ -12,12 +12,13 @@ import {
   ArrowRepeat,
   Shuffle,
 } from "react-bootstrap-icons";
+import { Source } from "../App";
 
 interface Props {
-  sourceId: string;
+  currentPlaylist: Array<any>;
 }
 
-export default function Player({ sourceId }: Props): JSX.Element {
+export default function Player({ currentPlaylist }: Props): JSX.Element {
   const [player, setPlayer] = useState<any>(null);
   const [playing, setPlaying] = useState<boolean>(false);
   const [progressBarCurrent, setProgressBarCurrent] = useState<number>(0);
@@ -31,10 +32,12 @@ export default function Player({ sourceId }: Props): JSX.Element {
   }, [volume]);
 
   useEffect(() => {
-    if (sourceId.length === 0) return;
-    changeSource(sourceId);
+    if (currentPlaylist.length === 0) return;
+    const newSource = currentPlaylist[0];
+    if (!newSource) return;
+    changeSource(newSource.id);
     setProgressTime(0);
-  }, [sourceId]);
+  }, [currentPlaylist]);
 
   function startProgressTimer(): void {
     setProgressInterval(

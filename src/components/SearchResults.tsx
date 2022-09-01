@@ -1,10 +1,11 @@
 import Result from "./Result";
 import styles from "../styles/SearchResults.module.css";
+import { Source } from "../App";
 
 interface Props {
   results: Array<any>;
-  setNewSource(id: string): void;
-  currentSource: string;
+  setNewSource(data: Source): void;
+  currentSource: Source | undefined;
 }
 
 export default function SearchResults({
@@ -18,7 +19,7 @@ export default function SearchResults({
         return (
           <Result
             data={result}
-            playVideo={(id) => setNewSource(id)}
+            setNewSource={setNewSource}
             key={index}
             currentSource={currentSource}
           />
