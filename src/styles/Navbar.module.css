@@ -13,7 +13,12 @@
 }
 
 .link {
-  /* outline: 1px solid red; */
-  padding-block: 11px;
+  padding-block: 10px;
   padding-inline: 40px;
+  border-radius: 20px;
+}
+
+.active {
+  background-color: var(--color2);
+  box-shadow: var(--shadow);
 }
