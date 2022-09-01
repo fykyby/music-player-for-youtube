@@ -6,14 +6,17 @@ import Playlist from "../pages/Playlist";
 import { useState } from "react";
 
 interface Props {
-  setNewSource(data: Array<Source>): void;
-  currentSource: Source | undefined;
+  setNewPlaylist(data: Array<Source>): void;
+  currentPlaylist: Array<Source>;
+  currentSongIndex: number;
+  setCurrentSongIndex(index: number): void;
 }
 
-// setNewSource("YdYwICNPDwI");
 export default function Main({
-  setNewSource,
-  currentSource,
+  currentPlaylist,
+  setNewPlaylist,
+  currentSongIndex,
+  setCurrentSongIndex,
 }: Props): JSX.Element {
   const [results, setResults] = useState<Array<Object>>([]);
 
@@ -26,12 +29,21 @@ export default function Main({
             <Search
               results={results}
               setResults={setResults}
-              setNewSource={setNewSource}
-              currentSource={currentSource}
+              setNewPlaylist={setNewPlaylist}
+              currentSource={currentPlaylist[currentSongIndex]}
             />
           }
         />
-        <Route path="/playlist" element={<Playlist />} />
+        <Route
+          path="/playlist"
+          element={
+            <Playlist
+              currentPlaylist={currentPlaylist}
+              currentSource={currentPlaylist[currentSongIndex]}
+              setCurrentSongIndex={setCurrentSongIndex}
+            />
+          }
+        />
         <Route path="/" element={<Navigate to="/search" />} />
       </Routes>
     </div>

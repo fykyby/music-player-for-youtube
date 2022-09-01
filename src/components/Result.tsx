@@ -6,19 +6,21 @@ import imgPlaceholder from "../images/black.png";
 
 interface Props {
   data: any;
-  setNewSource(data: Array<Source>): void;
+  setNewPlaylist(data: Array<Source>): void;
   currentSource: Source | undefined;
 }
 
 export default function Result({
   data,
-  setNewSource,
+  setNewPlaylist,
   currentSource,
 }: Props): JSX.Element {
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
-    if (currentSource === data.id.videoId) {
+    console.log(currentSource);
+
+    if (currentSource?.id === data.id.videoId) {
       setPlaying(true);
     } else {
       setPlaying(false);
@@ -32,8 +34,9 @@ export default function Result({
         title: data.snippet.title,
         channelTitle: data.snippet.channelTitle,
         thumbnail: data.snippet.thumbnails.default.url,
+        index: 0,
       };
-      setNewSource([newSource]);
+      setNewPlaylist([newSource]);
     } else if (data.id.kind === "youtube#playlist") {
       let newPlaylist: Array<any> = [];
       let nextPageToken = "";
@@ -75,7 +78,11 @@ export default function Result({
         newPlaylist = [...newPlaylist, ...filteredPlaylistData];
       } while (nextPageToken);
 
-      setNewSource(newPlaylist);
+      newPlaylist.forEach((item, index) => {
+        item.index = index;
+      });
+
+      setNewPlaylist(newPlaylist);
     }
   }
 

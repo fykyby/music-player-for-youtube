@@ -5,7 +5,6 @@ import { Search, MusicNoteList } from "react-bootstrap-icons";
 
 export default function Navbar(): JSX.Element {
   const location = useLocation();
-  console.log(location.pathname);
 
   return (
     <div className={styles.Navbar}>

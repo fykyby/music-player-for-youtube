@@ -14,6 +14,10 @@
   position: relative;
 }
 
+.active {
+  background-color: var(--color3);
+}
+
 .button:focus {
   outline: 3px solid var(--color3);
 }

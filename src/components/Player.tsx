@@ -16,9 +16,15 @@ import { Source } from "../App";
 
 interface Props {
   currentPlaylist: Array<Source>;
+  currentSongIndex: number;
+  setCurrentSongIndex(index: number): void;
 }
 
-export default function Player({ currentPlaylist }: Props): JSX.Element {
+export default function Player({
+  currentPlaylist,
+  setCurrentSongIndex,
+  currentSongIndex,
+}: Props): JSX.Element {
   const [player, setPlayer] = useState<any>(null);
   const [playing, setPlaying] = useState<boolean>(false);
   const [progressBarCurrent, setProgressBarCurrent] = useState<number>(0);
@@ -26,7 +32,6 @@ export default function Player({ currentPlaylist }: Props): JSX.Element {
   const [progressInterval, setProgressInterval] = useState<NodeJS.Timer>();
   const [repeat, setRepeat] = useState<number>(0); // 0 - no repeat, 1 - repeat playlist, 2 - repeat song
   const [volume, setVolume] = useState<number>(20);
-  const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
 
   useEffect(() => {
     player?.setVolume(volume);
@@ -34,11 +39,10 @@ export default function Player({ currentPlaylist }: Props): JSX.Element {
 
   useEffect(() => {
     if (currentPlaylist.length === 0) return;
-    const newSource = currentPlaylist[0];
-    setCurrentSongIndex(0);
+    const newSource = currentPlaylist[currentSongIndex];
     if (!newSource) return;
     changeSource(newSource.id);
-  }, [currentPlaylist]);
+  }, [currentSongIndex, currentPlaylist]);
 
   function startProgressTimer(): void {
     setProgressInterval(
@@ -72,13 +76,13 @@ export default function Player({ currentPlaylist }: Props): JSX.Element {
     }
   }
 
-  function handleMute(): void {
-    if (player.isMuted()) {
-      player.unMute();
-    } else {
-      player.mute();
-    }
-  }
+  // function handleMute(): void {
+  //   if (player.isMuted()) {
+  //     player.unMute();
+  //   } else {
+  //     player.mute();
+  //   }
+  // }
 
   function handleRepeat(): void {
     if (repeat === 0) {
@@ -124,7 +128,7 @@ export default function Player({ currentPlaylist }: Props): JSX.Element {
       restartPlaylist();
     } else {
       const newSource = currentPlaylist[currentSongIndex + 1];
-      setCurrentSongIndex((prev) => prev + 1);
+      setCurrentSongIndex(currentSongIndex + 1);
       changeSource(newSource.id);
     }
   }
@@ -145,7 +149,7 @@ export default function Player({ currentPlaylist }: Props): JSX.Element {
         changeSource(newSource.id);
       } else {
         const newSource = currentPlaylist[currentSongIndex - 1];
-        setCurrentSongIndex((prev) => prev - 1);
+        setCurrentSongIndex(currentSongIndex - 1);
         changeSource(newSource.id);
       }
     }
@@ -225,7 +229,7 @@ export default function Player({ currentPlaylist }: Props): JSX.Element {
         </button>
         <button
           className={`${miscStyles.button} ${miscStyles.smallButton} 
-          ${repeat !== 0 ? styles.buttonActive : null}
+          ${repeat !== 0 ? miscStyles.active : null}
           `}
           onClick={handleRepeat}
         >

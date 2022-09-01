@@ -11,24 +11,35 @@ export type Source = {
   title: string;
   channelTitle: string;
   thumbnail: string;
+  index: number;
 };
 
 export default function App(): JSX.Element {
   const [currentPlaylist, setCurrentPlaylist] = useState<Array<Source>>([]);
+  const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
 
-  // useEffect(() => {
-  //   console.log(currentPlaylist);
-  // }, [currentPlaylist]);
+  useEffect(() => {
+    setCurrentSongIndex(0);
+  }, [currentPlaylist]);
 
-  function setNewSource(data: Array<Source>): void {
+  function setNewPlaylist(data: Array<Source>): void {
     setCurrentPlaylist(data);
   }
 
   return (
     <BrowserRouter basename="/">
       <div className={styles.App}>
-        <Main setNewSource={setNewSource} currentSource={currentPlaylist[0]} />
-        <Player currentPlaylist={currentPlaylist} />
+        <Main
+          setNewPlaylist={setNewPlaylist}
+          currentPlaylist={currentPlaylist}
+          currentSongIndex={currentSongIndex}
+          setCurrentSongIndex={setCurrentSongIndex}
+        />
+        <Player
+          currentPlaylist={currentPlaylist}
+          currentSongIndex={currentSongIndex}
+          setCurrentSongIndex={setCurrentSongIndex}
+        />
         <Navbar />
       </div>
     </BrowserRouter>

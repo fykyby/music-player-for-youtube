@@ -4,7 +4,7 @@ import { Source } from "../App";
 import SearchBar from "../components/SearchBar";
 
 interface Props {
-  setNewSource(data: Array<Source>): void;
+  setNewPlaylist(data: Array<Source>): void;
   currentSource: Source | undefined;
   results: Array<Object>;
   setResults(results: Array<Object>): void;
@@ -13,7 +13,7 @@ interface Props {
 export default function Search({
   results,
   setResults,
-  setNewSource,
+  setNewPlaylist,
   currentSource,
 }: Props): JSX.Element {
   return (
@@ -24,7 +24,7 @@ export default function Search({
           return (
             <Result
               data={result}
-              setNewSource={setNewSource}
+              setNewPlaylist={setNewPlaylist}
               key={index}
               currentSource={currentSource}
             />
