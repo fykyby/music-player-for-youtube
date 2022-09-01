@@ -4,7 +4,7 @@ import { Source } from "../App";
 
 interface Props {
   results: Array<any>;
-  setNewSource(data: Source): void;
+  setNewSource(data: Array<Source>): void;
   currentSource: Source | undefined;
 }
 

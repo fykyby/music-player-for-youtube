@@ -12,23 +12,20 @@ export type Source = {
 };
 
 export default function App(): JSX.Element {
-  const [currentSource, setCurrentSource] = useState<Source>();
   const [currentPlaylist, setCurrentPlaylist] = useState<Array<Source>>([]);
 
-  useEffect(() => {
-    console.log(currentPlaylist);
-  }, [currentPlaylist]);
+  // useEffect(() => {
+  //   console.log(currentPlaylist);
+  // }, [currentPlaylist]);
 
-  function setNewSource(data: Source): void {
-    // setCurrentSource(data);
-    setCurrentPlaylist([data]);
+  function setNewSource(data: Array<Source>): void {
+    setCurrentPlaylist(data);
+    console.log(data);
   }
-
-  function setNewPlaylist() {}
 
   return (
     <div className={styles.App}>
-      <Main setNewSource={setNewSource} currentSource={currentSource} />
+      <Main setNewSource={setNewSource} currentSource={currentPlaylist[0]} />
       <Player currentPlaylist={currentPlaylist} />
     </div>
   );

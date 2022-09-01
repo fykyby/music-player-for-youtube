@@ -5,7 +5,7 @@ import SearchResults from "./SearchResults";
 import { Source } from "../App";
 
 interface Props {
-  setNewSource(data: Source): void;
+  setNewSource(data: Array<Source>): void;
   currentSource: Source | undefined;
 }
 
