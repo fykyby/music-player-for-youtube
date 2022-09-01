@@ -151,6 +151,10 @@ export default function Player({ currentPlaylist }: Props): JSX.Element {
     }
   }
 
+  function shufflePlaylist(): void {
+    console.log("shuffle");
+  }
+
   function changeSource(id: string): void {
     setProgressTime(0);
     player.loadVideoById(id);
@@ -196,7 +200,7 @@ export default function Player({ currentPlaylist }: Props): JSX.Element {
       <div className={styles.mainControls}>
         <button
           className={`${miscStyles.button} ${miscStyles.smallButton}`}
-          onClick={() => {}}
+          onClick={shufflePlaylist}
         >
           <Shuffle className={miscStyles.smallIcon} />
         </button>

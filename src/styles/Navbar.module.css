@@ -1,0 +1,19 @@
+.Navbar {
+  height: 54px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-color: var(--color1);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+  z-index: 6;
+  box-shadow: var(--shadow);
+}
+
+.link {
+  /* outline: 1px solid red; */
+  padding-block: 11px;
+  padding-inline: 40px;
+}

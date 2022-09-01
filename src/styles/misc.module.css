@@ -1,6 +1,6 @@
 .button {
-  --button-size-big: 80px;
-  --button-size-small: 48px;
+  --button-size-big: 74px;
+  --button-size-small: 44px;
   height: var(--button-size-big);
   width: var(--button-size-big);
   border: none;
@@ -38,7 +38,7 @@
 .textInput {
   border: none;
   box-shadow: var(--shadow);
-  height: 48px;
+  height: 44px;
   background-color: var(--color3);
   border-radius: 28px;
   padding-inline: 16px;
