@@ -1,5 +1,7 @@
 .Search {
   width: 100vw;
+  overflow: auto;
+  margin-top: 64px;
 }
 
 .SearchResults {

@@ -1,7 +1,7 @@
 .Main {
   display: flex;
-  padding-bottom: 202px;
   overflow: hidden;
   width: 200%;
+  height: calc(100vh - 202px);
   transition: margin 0.4s ease-in-out;
 }

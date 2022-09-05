@@ -1,15 +1,17 @@
 .SearchBar {
-  position: sticky;
+  position: fixed;
   top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--color1);
   height: 64px;
+  width: 100%;
   box-shadow: var(--shadow);
   padding-inline: 10px;
   z-index: 5;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .inputContainer {
@@ -19,7 +21,7 @@
   width: 100%;
 }
 
-.searchInput {
+.SearchBar .searchInput {
   flex-grow: 1;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;

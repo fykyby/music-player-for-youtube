@@ -1,4 +1,4 @@
 .Playlist {
-  /* width: 50%; */
   width: 100vw;
+  overflow: auto;
 }
