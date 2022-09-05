@@ -29,6 +29,7 @@ export default function Main({
         break;
       case "Search":
         setMargin("-100%");
+        break;
     }
   }, [page]);
 
