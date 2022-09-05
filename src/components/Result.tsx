@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "../styles/Result.module.css";
 import { MusicNoteList } from "react-bootstrap-icons";
 import { Source } from "../App";
-import imgPlaceholder from "../images/black.png";
+import { getPlaylistVideos } from "../misc";
 
 interface Props {
   data: any;
@@ -18,8 +18,6 @@ export default function Result({
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
-    console.log(currentSource);
-
     if (currentSource?.id === data.id.videoId) {
       setPlaying(true);
     } else {
@@ -38,50 +36,8 @@ export default function Result({
       };
       setNewPlaylist([newSource]);
     } else if (data.id.kind === "youtube#playlist") {
-      let newPlaylist: Array<any> = [];
-      let nextPageToken = "";
-
-      do {
-        const playlistData: any = await fetch(
-          `https://youtube.googleapis.com/youtube/v3/playlistItems?${
-            nextPageToken ? `pageToken=${nextPageToken}` : ""
-          }&part=snippet&maxResults=50&playlistId=${
-            data.id.playlistId
-          }&fields=nextPageToken%2C%20pageInfo%2C%20items%2Fsnippet(title%2C%20channelTitle%2C%20resourceId%2C%20thumbnails%2Fdefault(url))&key=${
-            process.env.REACT_APP_API_KEY
-          }`
-        );
-        const response = await playlistData.json();
-        nextPageToken = response.nextPageToken;
-
-        const filteredPlaylistData = response.items.map((item: any) => {
-          let newItem;
-          if (item.snippet.thumbnails.hasOwnProperty("default")) {
-            newItem = {
-              id: item.snippet.resourceId.videoId,
-              title: item.snippet.title,
-              channelTitle: item.snippet.channelTitle,
-              thumbnail: item.snippet.thumbnails.default.url,
-            };
-          } else {
-            newItem = {
-              id: item.snippet.resourceId.videoId,
-              title: item.snippet.title,
-              channelTitle: item.snippet.channelTitle,
-              thumbnail: imgPlaceholder,
-            };
-          }
-
-          return newItem;
-        });
-
-        newPlaylist = [...newPlaylist, ...filteredPlaylistData];
-      } while (nextPageToken);
-
-      newPlaylist.forEach((item, index) => {
-        item.index = index;
-      });
-
+      const newPlaylist = await getPlaylistVideos(data.id.playlistId);
+      if (!newPlaylist) return;
       setNewPlaylist(newPlaylist);
     }
   }

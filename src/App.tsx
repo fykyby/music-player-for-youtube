@@ -4,6 +4,8 @@ import styles from "./styles/App.module.css";
 import Player from "./components/Player";
 import Main from "./components/Main";
 import Navbar from "./components/Navbar";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Redirect from "./components/Redirect";
 
 export type Source = {
   id: string;
@@ -29,20 +31,33 @@ export default function App(): JSX.Element {
   }
 
   return (
-    <div className={styles.App}>
-      <Main
-        setNewPlaylist={setNewPlaylist}
-        currentPlaylist={currentPlaylist}
-        currentSongIndex={currentSongIndex}
-        setCurrentSongIndex={setCurrentSongIndex}
-        page={page}
-      />
-      <Player
-        currentPlaylist={currentPlaylist}
-        currentSongIndex={currentSongIndex}
-        setCurrentSongIndex={setCurrentSongIndex}
-      />
-      <Navbar setPage={setPage} />
-    </div>
+    <BrowserRouter basename="/">
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div className={styles.App}>
+              <Main
+                setNewPlaylist={setNewPlaylist}
+                currentPlaylist={currentPlaylist}
+                currentSongIndex={currentSongIndex}
+                setCurrentSongIndex={setCurrentSongIndex}
+                page={page}
+              />
+              <Player
+                currentPlaylist={currentPlaylist}
+                currentSongIndex={currentSongIndex}
+                setCurrentSongIndex={setCurrentSongIndex}
+              />
+              <Navbar setPage={setPage} />
+            </div>
+          }
+        />
+        <Route
+          path="/:id"
+          element={<Redirect setNewPlaylist={setNewPlaylist} />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }

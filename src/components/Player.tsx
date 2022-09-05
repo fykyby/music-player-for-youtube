@@ -38,11 +38,11 @@ export default function Player({
   }, [volume]);
 
   useEffect(() => {
-    if (currentPlaylist.length === 0) return;
+    if (currentPlaylist.length === 0 || !player) return;
     const newSource = currentPlaylist[currentSongIndex];
     if (!newSource) return;
     changeSource(newSource.id);
-  }, [currentSongIndex, currentPlaylist]);
+  }, [currentSongIndex, currentPlaylist, player]);
 
   function startProgressTimer(): void {
     setProgressInterval(
@@ -160,8 +160,13 @@ export default function Player({
   }
 
   function changeSource(id: string): void {
-    setProgressTime(0);
-    player.loadVideoById(id);
+    try {
+      setProgressTime(0);
+      player.loadVideoById(id);
+    } catch {
+      // For some reason everything would
+      // break if this try/catch wasn't here
+    }
   }
 
   // function handleVolumeChange(e: any): void {
