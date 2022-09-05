@@ -4,8 +4,9 @@ import styles from "./styles/App.module.css";
 import Player from "./components/Player";
 import Main from "./components/Main";
 import Navbar from "./components/Navbar";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Redirect from "./components/Redirect";
+import { shuffleArray } from "./misc";
 
 export type Source = {
   id: string;
@@ -26,8 +27,12 @@ export default function App(): JSX.Element {
     setCurrentSongIndex(0);
   }, [currentPlaylist]);
 
-  function setNewPlaylist(data: Array<Source>): void {
-    setCurrentPlaylist(data);
+  function shufflePlaylist(): void {
+    const newPlaylist = shuffleArray(currentPlaylist);
+    newPlaylist.forEach((item, index) => {
+      item.index = index;
+    });
+    setCurrentPlaylist([...newPlaylist]);
   }
 
   return (
@@ -38,7 +43,7 @@ export default function App(): JSX.Element {
           element={
             <div className={styles.App}>
               <Main
-                setNewPlaylist={setNewPlaylist}
+                setNewPlaylist={setCurrentPlaylist}
                 currentPlaylist={currentPlaylist}
                 currentSongIndex={currentSongIndex}
                 setCurrentSongIndex={setCurrentSongIndex}
@@ -48,6 +53,7 @@ export default function App(): JSX.Element {
                 currentPlaylist={currentPlaylist}
                 currentSongIndex={currentSongIndex}
                 setCurrentSongIndex={setCurrentSongIndex}
+                shufflePlaylist={shufflePlaylist}
               />
               <Navbar setPage={setPage} />
             </div>
@@ -55,7 +61,7 @@ export default function App(): JSX.Element {
         />
         <Route
           path="/:id"
-          element={<Redirect setNewPlaylist={setNewPlaylist} />}
+          element={<Redirect setNewPlaylist={setCurrentPlaylist} />}
         />
       </Routes>
     </BrowserRouter>

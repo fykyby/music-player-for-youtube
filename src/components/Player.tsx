@@ -18,12 +18,14 @@ interface Props {
   currentPlaylist: Array<Source>;
   currentSongIndex: number;
   setCurrentSongIndex(index: number): void;
+  shufflePlaylist(): void;
 }
 
 export default function Player({
   currentPlaylist,
   setCurrentSongIndex,
   currentSongIndex,
+  shufflePlaylist,
 }: Props): JSX.Element {
   const [player, setPlayer] = useState<any>(null);
   const [playing, setPlaying] = useState<boolean>(false);
@@ -153,10 +155,6 @@ export default function Player({
         changeSource(newSource.id);
       }
     }
-  }
-
-  function shufflePlaylist(): void {
-    console.log("shuffle");
   }
 
   function changeSource(id: string): void {
