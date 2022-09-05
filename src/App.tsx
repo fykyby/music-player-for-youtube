@@ -4,7 +4,6 @@ import styles from "./styles/App.module.css";
 import Player from "./components/Player";
 import Main from "./components/Main";
 import Navbar from "./components/Navbar";
-import { BrowserRouter } from "react-router-dom";
 
 export type Source = {
   id: string;
@@ -14,9 +13,12 @@ export type Source = {
   index: number;
 };
 
+export type Page = "Search" | "Playlist";
+
 export default function App(): JSX.Element {
   const [currentPlaylist, setCurrentPlaylist] = useState<Array<Source>>([]);
   const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
+  const [page, setPage] = useState<Page>("Search");
 
   useEffect(() => {
     setCurrentSongIndex(0);
@@ -27,21 +29,20 @@ export default function App(): JSX.Element {
   }
 
   return (
-    <BrowserRouter basename="/">
-      <div className={styles.App}>
-        <Main
-          setNewPlaylist={setNewPlaylist}
-          currentPlaylist={currentPlaylist}
-          currentSongIndex={currentSongIndex}
-          setCurrentSongIndex={setCurrentSongIndex}
-        />
-        <Player
-          currentPlaylist={currentPlaylist}
-          currentSongIndex={currentSongIndex}
-          setCurrentSongIndex={setCurrentSongIndex}
-        />
-        <Navbar />
-      </div>
-    </BrowserRouter>
+    <div className={styles.App}>
+      <Main
+        setNewPlaylist={setNewPlaylist}
+        currentPlaylist={currentPlaylist}
+        currentSongIndex={currentSongIndex}
+        setCurrentSongIndex={setCurrentSongIndex}
+        page={page}
+      />
+      <Player
+        currentPlaylist={currentPlaylist}
+        currentSongIndex={currentSongIndex}
+        setCurrentSongIndex={setCurrentSongIndex}
+      />
+      <Navbar setPage={setPage} />
+    </div>
   );
 }

@@ -1,10 +1,13 @@
+import { useEffect, useState } from "react";
 import { Source } from "../App";
 import PlaylistSong from "../components/PlaylistSong";
+import styles from "../styles/Playlist.module.css";
 
 interface Props {
   currentPlaylist: Array<Source>;
   currentSource: Source | undefined;
   setCurrentSongIndex(index: number): void;
+  page: string;
 }
 
 export default function Playlist({
@@ -13,7 +16,7 @@ export default function Playlist({
   setCurrentSongIndex,
 }: Props): JSX.Element {
   return (
-    <div>
+    <div className={styles.Playlist}>
       {currentPlaylist.map((result, index) => {
         return (
           <PlaylistSong

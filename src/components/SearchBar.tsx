@@ -27,7 +27,7 @@ export default function SearchBar({ setResults }: Props): JSX.Element {
   }
 
   return (
-    <div className={styles.search}>
+    <div className={styles.SearchBar}>
       <div className={styles.inputContainer}>
         <input
           className={`${miscStyles.textInput} ${styles.searchInput}`}

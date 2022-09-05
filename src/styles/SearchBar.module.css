@@ -1,4 +1,4 @@
-.search {
+.SearchBar {
   position: sticky;
   top: 0;
   display: flex;
@@ -9,6 +9,7 @@
   box-shadow: var(--shadow);
   padding-inline: 10px;
   z-index: 5;
+  overflow: hidden;
 }
 
 .inputContainer {
@@ -33,4 +34,5 @@
 .searchButton {
   border-top-left-radius: 0px !important;
   border-bottom-left-radius: 0px !important;
+  flex-shrink: 0;
 }

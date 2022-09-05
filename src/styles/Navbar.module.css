@@ -13,9 +13,14 @@
 }
 
 .link {
-  padding-block: 10px;
-  padding-inline: 40px;
+  background-color: transparent;
+  width: 20%;
+  height: 80%;
   border-radius: 20px;
+  box-shadow: none;
+  /* padding-block: 10px;
+  padding-inline: 40px;
+  border-radius: 20px; */
 }
 
 .active {

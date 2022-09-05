@@ -1,3 +1,7 @@
+.Search {
+  width: 100%;
+}
+
 .SearchResults {
   display: flex;
   flex-direction: column;

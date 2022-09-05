@@ -1,3 +1,7 @@
 .Main {
+  display: flex;
   padding-bottom: 202px;
+  overflow: hidden;
+  width: 200%;
+  transition: margin 0.4s ease-in-out;
 }
