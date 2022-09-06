@@ -36,7 +36,7 @@ export default function App(): JSX.Element {
   }
 
   return (
-    <BrowserRouter basename="/">
+    <BrowserRouter basename="/music-player-for-youtube">
       <Routes>
         <Route
           path="/"
