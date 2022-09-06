@@ -55,7 +55,7 @@ export default function App(): JSX.Element {
                 setCurrentSongIndex={setCurrentSongIndex}
                 shufflePlaylist={shufflePlaylist}
               />
-              <Navbar setPage={setPage} />
+              <Navbar setPage={setPage} page={page} />
             </div>
           }
         />
