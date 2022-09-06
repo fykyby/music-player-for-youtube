@@ -14,13 +14,15 @@ export default function Search({
   setNewPlaylist,
   currentSource,
 }: Props): JSX.Element {
-  const [results, setResults] = useState<Array<Object>>([]);
+  const [results, setResults] = useState<Array<any>>([]);
 
   return (
     <div className={styles.Search}>
       <SearchBar setResults={(results) => setResults(results)} />
       <div className={styles.SearchResults}>
         {results.map((result, index) => {
+          if (result.snippet.liveBroadcastContent === "live") return null;
+
           return (
             <Result
               data={result}
