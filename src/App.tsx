@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./styles/index.css";
 import styles from "./styles/App.module.css";
 import Player from "./components/Player";
@@ -23,16 +23,21 @@ export default function App(): JSX.Element {
   const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
   const [page, setPage] = useState<Page>("Search");
 
-  useEffect(() => {
+  function setNewPlaylist(newPlaylist: Array<Source>) {
     setCurrentSongIndex(0);
-  }, [currentPlaylist]);
+    setCurrentPlaylist([...newPlaylist]);
+  }
 
   function shufflePlaylist(): void {
-    const newPlaylist = shuffleArray(currentPlaylist);
+    let newPlaylist = currentPlaylist;
+    const currSrc = newPlaylist[currentSongIndex];
+    newPlaylist.splice(currentSongIndex, 1);
+    newPlaylist = shuffleArray(currentPlaylist);
+    newPlaylist.unshift(currSrc);
     newPlaylist.forEach((item, index) => {
       item.index = index;
     });
-    setCurrentPlaylist([...newPlaylist]);
+    setNewPlaylist(newPlaylist);
   }
 
   return (
@@ -43,7 +48,7 @@ export default function App(): JSX.Element {
           element={
             <div className={styles.App}>
               <Main
-                setNewPlaylist={setCurrentPlaylist}
+                setNewPlaylist={setNewPlaylist}
                 currentPlaylist={currentPlaylist}
                 currentSongIndex={currentSongIndex}
                 setCurrentSongIndex={setCurrentSongIndex}
@@ -61,7 +66,7 @@ export default function App(): JSX.Element {
         />
         <Route
           path="/:id"
-          element={<Redirect setNewPlaylist={setCurrentPlaylist} />}
+          element={<Redirect setNewPlaylist={setNewPlaylist} />}
         />
       </Routes>
     </BrowserRouter>

@@ -21,7 +21,7 @@ export default function PlaylistSong({
     } else {
       setPlaying(false);
     }
-  }, [currentSource]);
+  }, [currentSource, data]);
 
   async function handleClick() {
     if (currentSource?.index === data.index) return;

@@ -41,8 +41,11 @@ export default function Player({
 
   useEffect(() => {
     if (currentPlaylist.length === 0 || !player) return;
+
     const newSource = currentPlaylist[currentSongIndex];
     if (!newSource) return;
+    if (player.playerInfo.videoData.video_id === newSource.id) return;
+
     changeSource(newSource.id);
   }, [currentSongIndex, currentPlaylist, player]);
 
@@ -129,9 +132,9 @@ export default function Player({
     if (currentPlaylist.length - 1 === currentSongIndex) {
       restartPlaylist();
     } else {
-      const newSource = currentPlaylist[currentSongIndex + 1];
+      // const newSource = currentPlaylist[currentSongIndex + 1];
       setCurrentSongIndex(currentSongIndex + 1);
-      changeSource(newSource.id);
+      // changeSource(newSource.id);
     }
   }
 
@@ -146,13 +149,13 @@ export default function Player({
       handleSeek(0);
     } else {
       if (0 === currentSongIndex) {
-        const newSource = currentPlaylist[currentPlaylist.length - 1];
+        // const newSource = currentPlaylist[currentPlaylist.length - 1];
         setCurrentSongIndex(currentPlaylist.length - 1);
-        changeSource(newSource.id);
+        // changeSource(newSource.id);
       } else {
-        const newSource = currentPlaylist[currentSongIndex - 1];
+        // const newSource = currentPlaylist[currentSongIndex - 1];
         setCurrentSongIndex(currentSongIndex - 1);
-        changeSource(newSource.id);
+        // changeSource(newSource.id);
       }
     }
   }
