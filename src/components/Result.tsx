@@ -23,8 +23,10 @@ export default function Result({ data, currentSource }: Props): JSX.Element {
 
   async function handleClick(e: any) {
     if (data.id.kind === "youtube#video") {
+      if (data.id.videoId === currentSource?.id) return;
       navigate(`/${data.id.videoId}`);
     } else if (data.id.kind === "youtube#playlist") {
+      if (data.id.playlistid === currentSource?.id) return;
       navigate(`/${data.id.playlistId}`);
     }
   }
