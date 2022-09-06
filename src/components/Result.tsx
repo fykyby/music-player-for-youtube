@@ -23,7 +23,7 @@ export default function Result({
     } else {
       setPlaying(false);
     }
-  }, [currentSource]);
+  }, [currentSource, data]);
 
   async function handleClick(e: any) {
     if (data.id.kind === "youtube#video") {

@@ -7,17 +7,15 @@ import { useEffect, useState } from "react";
 interface Props {
   setNewPlaylist(data: Array<Source>): void;
   currentSource: Source | undefined;
-  results: Array<Object>;
-  setResults(results: Array<Object>): void;
   page: string;
 }
 
 export default function Search({
-  results,
-  setResults,
   setNewPlaylist,
   currentSource,
 }: Props): JSX.Element {
+  const [results, setResults] = useState<Array<Object>>([]);
+
   return (
     <div className={styles.Search}>
       <SearchBar setResults={(results) => setResults(results)} />

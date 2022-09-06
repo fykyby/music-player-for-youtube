@@ -19,7 +19,6 @@ export default function Main({
   setCurrentSongIndex,
   page,
 }: Props): JSX.Element {
-  const [results, setResults] = useState<Array<Object>>([]);
   const [margin, setMargin] = useState<string>();
 
   useEffect(() => {
@@ -42,8 +41,6 @@ export default function Main({
         page={page}
       />
       <Search
-        results={results}
-        setResults={setResults}
         setNewPlaylist={setNewPlaylist}
         currentSource={currentPlaylist[currentSongIndex]}
         page={page}
