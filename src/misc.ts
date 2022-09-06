@@ -1,6 +1,8 @@
 import imgPlaceholder from "./images/black.png";
 
 export function convertSeconds(seconds: number): string {
+  if (seconds === undefined) return "00:00";
+
   let result = new Date(seconds * 1000).toISOString().substr(11, 8);
   if (result[0] === "0" && result[1] === "0") {
     result = result.slice(3, result.length);

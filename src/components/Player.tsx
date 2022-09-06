@@ -161,9 +161,8 @@ export default function Player({
     try {
       setProgressTime(0);
       player.loadVideoById(id);
-    } catch {
-      // For some reason everything would
-      // break if this try/catch wasn't here
+    } catch (err) {
+      console.log(err);
     }
   }
 
