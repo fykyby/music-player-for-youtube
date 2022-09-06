@@ -34,7 +34,11 @@ export default function Result({ data, currentSource }: Props): JSX.Element {
 
   return (
     <Link
-      to="/"
+      to={
+        data.id.kind === "youtube#video"
+          ? `/${data.id.videoId}`
+          : `/${data.id.playlistId}`
+      }
       className={`${styles.Video} ${
         playing && data.id.kind === "youtube#video" ? styles.playing : null
       }`}

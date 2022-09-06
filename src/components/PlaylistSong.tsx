@@ -26,13 +26,15 @@ export default function PlaylistSong({
 
   async function handleClick(e: any) {
     e.preventDefault();
+    console.log(data);
+
     if (currentSource?.index === data.index) return;
     setCurrentSongIndex(data.index);
   }
 
   return (
     <Link
-      to="/"
+      to={`/${data.id}`}
       className={`${styles.Video} ${playing ? styles.playing : null}`}
       onClick={(e) => handleClick(e)}
     >
