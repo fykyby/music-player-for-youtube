@@ -2,7 +2,7 @@ import Result from "../components/Result";
 import styles from "../styles/Search.module.css";
 import { Source } from "../App";
 import SearchBar from "../components/SearchBar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface Props {
   setNewPlaylist(data: Array<Source>): void;

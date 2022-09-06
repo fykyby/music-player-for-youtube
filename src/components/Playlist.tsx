@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Source } from "../App";
 import PlaylistSong from "../components/PlaylistSong";
 import styles from "../styles/Playlist.module.css";
