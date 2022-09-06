@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/Result.module.css";
 import { Source } from "../App";
+import { Link } from "react-router-dom";
 
 interface Props {
   data: any;
@@ -23,15 +24,17 @@ export default function PlaylistSong({
     }
   }, [currentSource, data]);
 
-  async function handleClick() {
+  async function handleClick(e: any) {
+    e.preventDefault();
     if (currentSource?.index === data.index) return;
     setCurrentSongIndex(data.index);
   }
 
   return (
-    <div
+    <Link
+      to="/"
       className={`${styles.Video} ${playing ? styles.playing : null}`}
-      onClick={handleClick}
+      onClick={(e) => handleClick(e)}
     >
       <div className={styles.index}>{data.index + 1}</div>
       <div className={styles.thumbnailContainer}>
@@ -41,6 +44,6 @@ export default function PlaylistSong({
         <div className={styles.title}>{data.title}</div>
         <div className={styles.channel}>{data.channelTitle}</div>
       </div>
-    </div>
+    </Link>
   );
 }

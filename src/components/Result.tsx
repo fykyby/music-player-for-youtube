@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "../styles/Result.module.css";
 import { MusicNoteList } from "react-bootstrap-icons";
 import { Source } from "../App";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface Props {
   data: any;
@@ -22,6 +22,7 @@ export default function Result({ data, currentSource }: Props): JSX.Element {
   }, [currentSource, data]);
 
   async function handleClick(e: any) {
+    e.preventDefault();
     if (data.id.kind === "youtube#video") {
       if (data.id.videoId === currentSource?.id) return;
       navigate(`/${data.id.videoId}`);
@@ -32,7 +33,8 @@ export default function Result({ data, currentSource }: Props): JSX.Element {
   }
 
   return (
-    <div
+    <Link
+      to="/"
       className={`${styles.Video} ${
         playing && data.id.kind === "youtube#video" ? styles.playing : null
       }`}
@@ -48,6 +50,6 @@ export default function Result({ data, currentSource }: Props): JSX.Element {
         <div className={styles.title}>{data.snippet.title}</div>
         <div className={styles.channel}>{data.snippet.channelTitle}</div>
       </div>
-    </div>
+    </Link>
   );
 }
