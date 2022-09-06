@@ -18,7 +18,8 @@ export default function Redirect({ setNewPlaylist }: Props): JSX.Element {
       const response = await data.json();
       const video = response.items[0];
 
-      if (!video) return;
+      if (!video || video.snippet.liveBroadcastContent === "live") return;
+
       const newSource = {
         id: video.id,
         title: video.snippet.title,
