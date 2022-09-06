@@ -125,16 +125,8 @@ export default function Player({
       }
     } else if (repeat === 2) {
       player.playVideo();
-    }
-  }
-
-  function handleNext(): void {
-    if (currentPlaylist.length - 1 === currentSongIndex) {
-      restartPlaylist();
     } else {
-      // const newSource = currentPlaylist[currentSongIndex + 1];
-      setCurrentSongIndex(currentSongIndex + 1);
-      // changeSource(newSource.id);
+      handleNext();
     }
   }
 
@@ -144,18 +136,22 @@ export default function Player({
     changeSource(newSource.id);
   }
 
+  function handleNext(): void {
+    if (currentPlaylist.length - 1 === currentSongIndex) {
+      restartPlaylist();
+    } else {
+      setCurrentSongIndex(currentSongIndex + 1);
+    }
+  }
+
   function handlePrevious(): void {
     if (progressBarCurrent > 4) {
       handleSeek(0);
     } else {
       if (0 === currentSongIndex) {
-        // const newSource = currentPlaylist[currentPlaylist.length - 1];
         setCurrentSongIndex(currentPlaylist.length - 1);
-        // changeSource(newSource.id);
       } else {
-        // const newSource = currentPlaylist[currentSongIndex - 1];
         setCurrentSongIndex(currentSongIndex - 1);
-        // changeSource(newSource.id);
       }
     }
   }
