@@ -10,7 +10,7 @@ interface Props {
 
 export default function Navbar({ setPage, page }: Props): JSX.Element {
   return (
-    <div className={styles.Navbar}>
+    <nav className={styles.Navbar}>
       <button
         onClick={() => setPage("Playlist")}
         className={`${styles.link} ${miscStyles.button} ${
@@ -27,6 +27,6 @@ export default function Navbar({ setPage, page }: Props): JSX.Element {
       >
         <Search className={miscStyles.smallIcon} />
       </button>
-    </div>
+    </nav>
   );
 }

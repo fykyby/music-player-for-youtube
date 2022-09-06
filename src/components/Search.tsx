@@ -13,7 +13,7 @@ export default function Search({ currentSource }: Props): JSX.Element {
   const [results, setResults] = useState<Array<any>>([]);
 
   return (
-    <div className={styles.Search}>
+    <section className={styles.Search}>
       <SearchBar setResults={(results) => setResults(results)} />
       <div className={styles.SearchResults}>
         {results.map((result, index) => {
@@ -24,6 +24,6 @@ export default function Search({ currentSource }: Props): JSX.Element {
           );
         })}
       </div>
-    </div>
+    </section>
   );
 }

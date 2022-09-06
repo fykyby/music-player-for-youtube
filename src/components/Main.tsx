@@ -82,7 +82,7 @@ export default function Main({
   }, [page]);
 
   return (
-    <div className={styles.Main} style={{ marginLeft: margin }}>
+    <main className={styles.Main} style={{ marginLeft: margin }}>
       <Playlist
         currentPlaylist={currentPlaylist}
         currentSource={currentPlaylist[currentSongIndex]}
@@ -90,6 +90,6 @@ export default function Main({
         page={page}
       />
       <Search currentSource={currentPlaylist[currentSongIndex]} page={page} />
-    </div>
+    </main>
   );
 }

@@ -15,7 +15,7 @@ export default function Playlist({
   setCurrentSongIndex,
 }: Props): JSX.Element {
   return (
-    <div className={styles.Playlist}>
+    <section className={styles.Playlist}>
       {currentPlaylist.map((result, index) => {
         return (
           <PlaylistSong
@@ -26,6 +26,6 @@ export default function Playlist({
           />
         );
       })}
-    </div>
+    </section>
   );
 }
