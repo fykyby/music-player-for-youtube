@@ -44,7 +44,7 @@ export default function Player({
 
     const newSource = currentPlaylist[currentSongIndex];
     if (!newSource) return;
-    if (player.playerInfo.videoData.video_id === newSource.id) return;
+    if (player.playerInfo?.videoData?.video_id === newSource.id) return;
 
     changeSource(newSource.id);
   }, [currentSongIndex, currentPlaylist, player]);

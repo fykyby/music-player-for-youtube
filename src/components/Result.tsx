@@ -2,20 +2,16 @@ import { useEffect, useState } from "react";
 import styles from "../styles/Result.module.css";
 import { MusicNoteList } from "react-bootstrap-icons";
 import { Source } from "../App";
-import { getPlaylistVideos } from "../misc";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   data: any;
-  setNewPlaylist(data: Array<Source>): void;
   currentSource: Source | undefined;
 }
 
-export default function Result({
-  data,
-  setNewPlaylist,
-  currentSource,
-}: Props): JSX.Element {
+export default function Result({ data, currentSource }: Props): JSX.Element {
   const [playing, setPlaying] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (currentSource?.id === data.id.videoId) {
@@ -27,18 +23,9 @@ export default function Result({
 
   async function handleClick(e: any) {
     if (data.id.kind === "youtube#video") {
-      const newSource = {
-        id: data.id.videoId,
-        title: data.snippet.title,
-        channelTitle: data.snippet.channelTitle,
-        thumbnail: data.snippet.thumbnails.default.url,
-        index: 0,
-      };
-      setNewPlaylist([newSource]);
+      navigate(`/${data.id.videoId}`);
     } else if (data.id.kind === "youtube#playlist") {
-      const newPlaylist = await getPlaylistVideos(data.id.playlistId);
-      if (!newPlaylist) return;
-      setNewPlaylist(newPlaylist);
+      navigate(`/${data.id.playlistId}`);
     }
   }
 

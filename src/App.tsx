@@ -5,7 +5,6 @@ import Player from "./components/Player";
 import Main from "./components/Main";
 import Navbar from "./components/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Redirect from "./components/Redirect";
 import { shuffleArray } from "./misc";
 
 export type Source = {
@@ -21,7 +20,7 @@ export type Page = "Search" | "Playlist";
 export default function App(): JSX.Element {
   const [currentPlaylist, setCurrentPlaylist] = useState<Array<Source>>([]);
   const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
-  const [page, setPage] = useState<Page>("Search");
+  const [page, setPage] = useState<Page>("Playlist");
 
   function setNewPlaylist(newPlaylist: Array<Source>) {
     setCurrentSongIndex(0);
@@ -40,34 +39,30 @@ export default function App(): JSX.Element {
     setNewPlaylist(newPlaylist);
   }
 
+  const mainComponent = (
+    <div className={styles.App}>
+      <Main
+        setNewPlaylist={setNewPlaylist}
+        currentPlaylist={currentPlaylist}
+        currentSongIndex={currentSongIndex}
+        setCurrentSongIndex={setCurrentSongIndex}
+        page={page}
+      />
+      <Player
+        currentPlaylist={currentPlaylist}
+        currentSongIndex={currentSongIndex}
+        setCurrentSongIndex={setCurrentSongIndex}
+        shufflePlaylist={shufflePlaylist}
+      />
+      <Navbar setPage={setPage} page={page} />
+    </div>
+  );
+
   return (
     <BrowserRouter basename="/music-player-for-youtube">
       <Routes>
-        <Route
-          path="/"
-          element={
-            <div className={styles.App}>
-              <Main
-                setNewPlaylist={setNewPlaylist}
-                currentPlaylist={currentPlaylist}
-                currentSongIndex={currentSongIndex}
-                setCurrentSongIndex={setCurrentSongIndex}
-                page={page}
-              />
-              <Player
-                currentPlaylist={currentPlaylist}
-                currentSongIndex={currentSongIndex}
-                setCurrentSongIndex={setCurrentSongIndex}
-                shufflePlaylist={shufflePlaylist}
-              />
-              <Navbar setPage={setPage} page={page} />
-            </div>
-          }
-        />
-        <Route
-          path="/:id"
-          element={<Redirect setNewPlaylist={setNewPlaylist} />}
-        />
+        <Route path="/" element={mainComponent} />
+        <Route path="/:id" element={mainComponent} />
       </Routes>
     </BrowserRouter>
   );
