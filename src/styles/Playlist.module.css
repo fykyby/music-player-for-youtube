@@ -25,6 +25,10 @@
   white-space: nowrap;
 }
 
+.titleName {
+  font-size: 18px;
+}
+
 .titleChannel {
   color: var(--color4);
   font-weight: bold;
