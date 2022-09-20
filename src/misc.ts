@@ -1,5 +1,3 @@
-import imgPlaceholder from "./images/black.png";
-
 export function convertSeconds(seconds: number): string {
   if (seconds === undefined) return "00:00";
 
