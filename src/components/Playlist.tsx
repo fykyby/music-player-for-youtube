@@ -26,7 +26,7 @@ export default function Playlist({
           </div>
         </div>
       ) : (
-        <div className={styles.titleBar}>Current Playlist</div>
+        <div className={styles.titleBar}></div>
       )}
 
       {currentPlaylist.map((result, index) => {
