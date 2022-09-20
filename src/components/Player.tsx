@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import YouTube from "react-youtube";
 import styles from "../styles/Player.module.css";
 import miscStyles from "../styles/misc.module.css";
+import inputRangeStyles from "../styles/ProgressBar.module.css";
 import ProgressBar from "./ProgressBar";
 import { convertSeconds } from "../misc";
 import {
@@ -11,6 +12,8 @@ import {
   CaretRightFill,
   ArrowRepeat,
   Shuffle,
+  VolumeUpFill,
+  VolumeMuteFill,
 } from "react-bootstrap-icons";
 import { Source } from "../App";
 
@@ -34,6 +37,7 @@ export default function Player({
   const [progressInterval, setProgressInterval] = useState<NodeJS.Timer>();
   const [repeat, setRepeat] = useState<number>(0); // 0 - no repeat, 1 - repeat playlist, 2 - repeat song
   const [volume, setVolume] = useState<number>(20);
+  const [muted, setMuted] = useState<boolean>(false);
 
   useEffect(() => {
     player?.setVolume(volume);
@@ -80,14 +84,6 @@ export default function Player({
       player.playVideo();
     }
   }
-
-  // function handleMute(): void {
-  //   if (player.isMuted()) {
-  //     player.unMute();
-  //   } else {
-  //     player.mute();
-  //   }
-  // }
 
   function handleRepeat(): void {
     if (repeat === 0) {
@@ -165,9 +161,19 @@ export default function Player({
     }
   }
 
-  // function handleVolumeChange(e: any): void {
-  //   setVolume(e.target.value);
-  // }
+  function handleMute(): void {
+    if (player.isMuted()) {
+      setMuted(false);
+      player.unMute();
+    } else {
+      setMuted(true);
+      player.mute();
+    }
+  }
+
+  function handleVolumeChange(e: any): void {
+    setVolume(e.target.value);
+  }
 
   return (
     <div className={styles.Player}>
@@ -203,56 +209,67 @@ export default function Player({
         </p>
       </div>
       <div className={styles.mainControls}>
-        <button
-          className={`${miscStyles.button} ${miscStyles.smallButton}`}
-          onClick={shufflePlaylist}
-        >
-          <Shuffle className={miscStyles.smallIcon} />
-        </button>
-        <button
-          className={`${miscStyles.button} ${miscStyles.smallButton}`}
-          onClick={handlePrevious}
-        >
-          <CaretLeftFill className={miscStyles.smallIcon} />
-        </button>
-        <button className={miscStyles.button} onClick={handlePause}>
-          {playing ? (
-            <PauseFill className={miscStyles.icon} />
-          ) : (
-            <PlayFill className={miscStyles.icon} />
-          )}
-        </button>
-        <button
-          className={`${miscStyles.button} ${miscStyles.smallButton}`}
-          onClick={handleNext}
-        >
-          <CaretRightFill className={miscStyles.smallIcon} />
-        </button>
-        <button
-          className={`${miscStyles.button} ${miscStyles.smallButton} 
-          ${repeat !== 0 ? miscStyles.active : null}
-          `}
-          onClick={handleRepeat}
-        >
-          <ArrowRepeat className={miscStyles.smallIcon} />
-          {repeat === 2 ? <div className={styles.repeatVal}>1</div> : null}
-        </button>
+        <div className={styles.playerControls}>
+          <button
+            className={`${miscStyles.button} ${miscStyles.smallButton}`}
+            onClick={shufflePlaylist}
+          >
+            <Shuffle className={miscStyles.smallIcon} />
+          </button>
+          <button
+            className={`${miscStyles.button} ${miscStyles.smallButton}`}
+            onClick={handlePrevious}
+          >
+            <CaretLeftFill className={miscStyles.smallIcon} />
+          </button>
+          <button className={miscStyles.button} onClick={handlePause}>
+            {playing ? (
+              <PauseFill className={miscStyles.icon} />
+            ) : (
+              <PlayFill className={miscStyles.icon} />
+            )}
+          </button>
+          <button
+            className={`${miscStyles.button} ${miscStyles.smallButton}`}
+            onClick={handleNext}
+          >
+            <CaretRightFill className={miscStyles.smallIcon} />
+          </button>
+          <button
+            className={`${miscStyles.button} ${miscStyles.smallButton}
+              ${repeat !== 0 ? miscStyles.active : null}
+              `}
+            onClick={handleRepeat}
+          >
+            <ArrowRepeat className={miscStyles.smallIcon} />
+            {repeat === 2 ? <div className={styles.repeatVal}>1</div> : null}
+          </button>
+        </div>
+        <div className={styles.volumeControls}>
+          <button
+            className={`${miscStyles.button} ${miscStyles.smallButton}`}
+            onClick={handleMute}
+          >
+            {muted ? (
+              <VolumeMuteFill className={miscStyles.smallIcon} />
+            ) : (
+              <VolumeUpFill className={miscStyles.smallIcon} />
+            )}
+          </button>
+          <div className={styles.volumeBarContainer}>
+            <input
+              className={inputRangeStyles.progressBar}
+              type="range"
+              value={volume}
+              min={0}
+              max={100}
+              onChange={(e) => {
+                handleVolumeChange(e);
+              }}
+            />
+          </div>
+        </div>
       </div>
-      {/* <div className={styles.volumeControls}>
-        <button className={styles.muteButton} onClick={handleMute}>
-          Toggle Mute
-        </button>
-        <input
-          className={styles.volumeSlider}
-          type="range"
-          value={volume}
-          min={0}
-          max={100}
-          onChange={(e) => {
-            handleVolumeChange(e);
-          }}
-        />
-      </div> */}
     </div>
   );
 }

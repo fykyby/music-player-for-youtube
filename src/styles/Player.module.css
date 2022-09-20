@@ -31,12 +31,21 @@
 }
 
 .mainControls {
+  display: grid;
+  grid-template-columns: 0fr 1fr 0fr;
+  width: 85%;
+  place-items: center;
+}
+
+.playerControls {
   width: 85%;
   max-width: 480px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   gap: 10px;
+  grid-column-start: 2;
+  grid-column-end: 3;
 }
 
 .buttonActive {
@@ -57,10 +66,26 @@
 
 .volumeControls {
   display: none;
+  gap: 12px;
+  grid-column-start: 3;
+  grid-column-end: 4;
+  justify-self: flex-end;
+}
+
+.volumeBarContainer {
+  display: flex;
 }
 
 @media (min-width: 960px) {
   .Player {
     bottom: 0;
+  }
+
+  .mainControls {
+    grid-template-columns: 0.8fr 2fr 0.8fr;
+  }
+
+  .volumeControls {
+    display: flex;
   }
 }
