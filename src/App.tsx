@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./styles/index.css";
 import styles from "./styles/App.module.css";
 import Player from "./components/Player";

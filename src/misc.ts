@@ -19,35 +19,33 @@ export async function getPlaylistVideos(id: string) {
       const playlistData: any = await fetch(
         `https://youtube.googleapis.com/youtube/v3/playlistItems?${
           nextPageToken ? `pageToken=${nextPageToken}` : ""
-        }&part=snippet&maxResults=50&playlistId=${id}&fields=nextPageToken%2C%20pageInfo%2C%20items%2Fsnippet(title%2C%20channelTitle%2C%20resourceId%2C%20thumbnails%2Fdefault(url))&key=${
+        }&part=snippet&maxResults=50&playlistId=${id}&fields=nextPageToken%2C%20pageInfo%2C%20items%2Fsnippet(title%2C%20videoOwnerChannelTitle%2C%20resourceId%2C%20thumbnails%2Fdefault(url))&key=${
           process.env.REACT_APP_API_KEY
         }`
       );
       const response = await playlistData.json();
       nextPageToken = response.nextPageToken;
 
-      const filteredPlaylistData = response.items.map((item: any) => {
-        let newItem;
-        if (item.snippet.thumbnails.hasOwnProperty("default")) {
-          newItem = {
-            id: item.snippet.resourceId.videoId,
-            title: item.snippet.title,
-            channelTitle: item.snippet.channelTitle,
-            thumbnail: item.snippet.thumbnails.default.url,
-          };
+      const filteredPlaylistData = response.items.filter((item: any) => {
+        if (item.snippet.thumbnails.default) {
+          return true;
         } else {
-          newItem = {
-            id: item.snippet.resourceId.videoId,
-            title: item.snippet.title,
-            channelTitle: item.snippet.channelTitle,
-            thumbnail: imgPlaceholder,
-          };
+          return false;
         }
+      });
+
+      const finalPlaylistData = filteredPlaylistData.map((item: any) => {
+        const newItem = {
+          id: item.snippet.resourceId.videoId,
+          title: item.snippet.title,
+          channelTitle: item.snippet.videoOwnerChannelTitle,
+          thumbnail: item.snippet.thumbnails.default.url,
+        };
 
         return newItem;
       });
 
-      newPlaylist = [...newPlaylist, ...filteredPlaylistData];
+      newPlaylist = [...newPlaylist, ...finalPlaylistData];
     } while (nextPageToken);
 
     newPlaylist.forEach((item, index) => {

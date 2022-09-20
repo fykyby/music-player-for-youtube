@@ -26,7 +26,6 @@ export default function PlaylistSong({
 
   async function handleClick(e: any) {
     e.preventDefault();
-    console.log(data);
     if (currentSource?.index === data.index) return;
     setCurrentSongIndex(data.index);
   }
