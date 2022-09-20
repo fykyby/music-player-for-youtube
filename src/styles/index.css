@@ -5,7 +5,7 @@
   --color2: #082032;
   --color3: #2c394b;
   --color4: #334756;
-  --shadow: 3px 3px 8px 0px rgba(0, 0, 0, 0.35);
+  --shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.3);
 }
 
 * {
