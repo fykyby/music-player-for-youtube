@@ -4,6 +4,7 @@
   width: 200%;
   height: calc(100vh - 190px);
   transition: margin 0.4s ease-in-out;
+  background-color: var(--color2);
 }
 
 .offScreenLeft {

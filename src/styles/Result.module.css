@@ -10,6 +10,7 @@
   -webkit-user-select: none;
   transition: background-color 0.1s;
   text-decoration: none;
+  background-color: var(--color2);
 }
 
 .Video:hover {
