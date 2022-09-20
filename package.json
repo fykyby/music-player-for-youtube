@@ -12,14 +12,15 @@
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "dotenv": "^16.0.1",
+    "html-entities": "^2.3.3",
+    "nth-check": ">=2.0.1",
     "react": "^18.2.0",
     "react-bootstrap-icons": "^1.8.4",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
     "react-youtube": "^9.0.3",
     "typescript": "^4.8.2",
-    "web-vitals": "^2.1.4",
-    "nth-check": ">=2.0.1"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "predeploy": "npm run build",
@@ -49,7 +50,7 @@
   },
   "devDependencies": {
     "gh-pages": "^4.0.0",
-    "react-scripts": "5.0.1",
-    "nth-check": ">=2.0.1"
+    "nth-check": ">=2.0.1",
+    "react-scripts": "5.0.1"
   }
 }

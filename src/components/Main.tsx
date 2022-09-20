@@ -21,6 +21,7 @@ export default function Main({
   setCurrentSongIndex,
   page,
 }: Props): JSX.Element {
+  const [currentPlaylistInfo, setCurrentPlaylistInfo] = useState<any>();
   const [customPositionClass, setCustomPositionClass] = useState<any>();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -48,17 +49,33 @@ export default function Main({
         index: 0,
       };
 
+      setCurrentPlaylistInfo(newSource);
       setNewPlaylist([newSource]);
     }
 
     async function handlePlaylists() {
       if (!id) return;
+      const data = await fetch(
+        `https://youtube.googleapis.com/youtube/v3/playlists?part=snippet&id=${id}&key=${process.env.REACT_APP_API_KEY}`
+      );
+      const response = await data.json();
+      const playlist = response.items[0];
+
+      const newSource = {
+        id: playlist.id,
+        title: playlist.snippet.title,
+        channelTitle: playlist.snippet.channelTitle,
+        thumbnail: playlist.snippet.thumbnails.default.url,
+      };
+
       const newPlaylist = await getPlaylistVideos(id);
 
       if (!newPlaylist) {
         navigate("/");
         return;
       }
+
+      setCurrentPlaylistInfo(newSource);
       setNewPlaylist(newPlaylist);
     }
 
@@ -88,6 +105,7 @@ export default function Main({
         currentSource={currentPlaylist[currentSongIndex]}
         setCurrentSongIndex={setCurrentSongIndex}
         page={page}
+        currentPlaylistInfo={currentPlaylistInfo}
       />
       <Search currentSource={currentPlaylist[currentSongIndex]} page={page} />
     </main>

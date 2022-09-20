@@ -7,16 +7,28 @@ interface Props {
   currentSource: Source | undefined;
   setCurrentSongIndex(index: number): void;
   page: string;
+  currentPlaylistInfo: any;
 }
 
 export default function Playlist({
   currentPlaylist,
   currentSource,
   setCurrentSongIndex,
+  currentPlaylistInfo,
 }: Props): JSX.Element {
   return (
     <section className={styles.Playlist}>
-      <div className={styles.titleBar}>Current Playlist</div>
+      {currentPlaylistInfo ? (
+        <div className={styles.titleBar}>
+          <div className={styles.titleName}>{currentPlaylistInfo.title}</div>
+          <div className={styles.titleChannel}>
+            {currentPlaylistInfo.channelTitle}
+          </div>
+        </div>
+      ) : (
+        <div className={styles.titleBar}>Current Playlist</div>
+      )}
+
       {currentPlaylist.map((result, index) => {
         return (
           <PlaylistSong

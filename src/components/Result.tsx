@@ -3,6 +3,7 @@ import styles from "../styles/Result.module.css";
 import { MusicNoteList } from "react-bootstrap-icons";
 import { Source } from "../App";
 import { Link, useNavigate } from "react-router-dom";
+import { decode } from "html-entities";
 
 interface Props {
   data: any;
@@ -51,8 +52,10 @@ export default function Result({ data, currentSource }: Props): JSX.Element {
         ) : null}
       </div>
       <div className={styles.info}>
-        <div className={styles.title}>{data.snippet.title}</div>
-        <div className={styles.channel}>{data.snippet.channelTitle}</div>
+        <div className={styles.title}>{decode(data.snippet.title)}</div>
+        <div className={styles.channel}>
+          {decode(data.snippet.channelTitle)}
+        </div>
       </div>
     </Link>
   );
