@@ -16,6 +16,7 @@ export default function Playlist({
 }: Props): JSX.Element {
   return (
     <section className={styles.Playlist}>
+      <div className={styles.titleBar}>Current Playlist</div>
       {currentPlaylist.map((result, index) => {
         return (
           <PlaylistSong

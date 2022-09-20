@@ -1,4 +1,28 @@
 .Playlist {
   width: 50%;
   overflow: auto;
+  margin-top: 64px;
+}
+
+.titleBar {
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color1);
+  height: 64px;
+  width: 100%;
+  box-shadow: var(--shadow);
+  padding-inline: 10px;
+  z-index: 5;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-size: 20px;
+}
+
+@media (min-width: 960px) {
+  .titleBar {
+    width: 50%;
+  }
 }

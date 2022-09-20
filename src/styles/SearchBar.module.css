@@ -38,3 +38,9 @@
   border-bottom-left-radius: 0px !important;
   flex-shrink: 0;
 }
+
+@media (min-width: 960px) {
+  .SearchBar {
+    width: 50%;
+  }
+}
