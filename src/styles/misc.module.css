@@ -1,6 +1,7 @@
 .button {
   --button-size-big: 74px;
   --button-size-small: 44px;
+  --button-size-smaller: 36px;
   height: var(--button-size-big);
   width: var(--button-size-big);
   border: none;

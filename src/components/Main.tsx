@@ -21,7 +21,7 @@ export default function Main({
   setCurrentSongIndex,
   page,
 }: Props): JSX.Element {
-  const [margin, setMargin] = useState<string>();
+  const [customPositionClass, setCustomPositionClass] = useState<any>();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -73,16 +73,16 @@ export default function Main({
   useEffect(() => {
     switch (page) {
       case "Playlist":
-        setMargin("0%");
+        setCustomPositionClass("");
         break;
       case "Search":
-        setMargin("-100%");
+        setCustomPositionClass(styles.offScreenLeft);
         break;
     }
   }, [page]);
 
   return (
-    <main className={styles.Main} style={{ marginLeft: margin }}>
+    <main className={`${styles.Main} ${customPositionClass}`}>
       <Playlist
         currentPlaylist={currentPlaylist}
         currentSource={currentPlaylist[currentSongIndex]}

@@ -9,7 +9,8 @@
   background-color: var(--color1);
   padding-bottom: 23px;
   padding-top: 8px;
-  height: 118px;
+  height: 141px;
+  box-sizing: border-box;
   box-shadow: var(--shadow);
   z-index: 5;
 }
@@ -31,6 +32,7 @@
 
 .mainControls {
   width: 85%;
+  max-width: 480px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -55,4 +57,10 @@
 
 .volumeControls {
   display: none;
+}
+
+@media (min-width: 960px) {
+  .Player {
+    bottom: 0;
+  }
 }
