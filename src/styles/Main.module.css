@@ -2,7 +2,7 @@
   display: flex;
   overflow: hidden;
   width: 200%;
-  height: calc(100vh - 190px);
+  height: calc(100vh - 195px);
   transition: margin 0.4s ease-in-out;
   background-color: var(--color2);
 }
@@ -14,7 +14,7 @@
 @media (min-width: 960px) {
   .Main {
     width: 100%;
-    height: calc(100vh - 137px);
+    height: calc(100vh - 141px);
   }
 
   .offScreenLeft {

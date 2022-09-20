@@ -24,20 +24,20 @@ body {
 /* Firefox */
 * {
   scrollbar-width: auto;
-  scrollbar-color: var(--color3) var(--color2);
+  scrollbar-color: var(--color1) var(--color2);
 }
 
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 10px;
+  width: 14px;
 }
 
 *::-webkit-scrollbar-track {
   background: var(--color2);
+  border: 1px solid var(--color1);
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: var(--color3);
-  border-radius: 4px;
-  border: none;
+  background-color: var(--color4);
+  border-radius: 6px;
 }
