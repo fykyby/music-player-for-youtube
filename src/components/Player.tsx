@@ -136,6 +136,8 @@ export default function Player({
     if (repeat === 1) {
       if (currentPlaylist.length - 1 === currentSongIndex) {
         restartPlaylist();
+      } else {
+        handleNext();
       }
     } else if (repeat === 2) {
       player.playVideo();
