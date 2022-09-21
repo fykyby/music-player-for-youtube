@@ -133,13 +133,7 @@ export default function Player({
   }
 
   function handleEnd(): void {
-    if (repeat === 1) {
-      if (currentPlaylist.length - 1 === currentSongIndex) {
-        restartPlaylist();
-      } else {
-        handleNext();
-      }
-    } else if (repeat === 2) {
+    if (repeat === 2) {
       player.playVideo();
     } else {
       handleNext();
@@ -155,6 +149,8 @@ export default function Player({
   function handleNext(): void {
     if (currentPlaylist.length - 1 !== currentSongIndex) {
       setCurrentSongIndex(currentSongIndex + 1);
+    } else if (repeat === 1) {
+      restartPlaylist();
     }
   }
 
