@@ -40,24 +40,6 @@ export default function Player({
   const [muted, setMuted] = useState<boolean>(false);
 
   useEffect(() => {
-    function eventFunction(e: any) {
-      switch (e.key) {
-        case "MediaTrackNext":
-          handleNext();
-          break;
-        case "MediaTrackPrevious":
-          handlePrevious();
-          break;
-      }
-    }
-
-    window.addEventListener("keydown", eventFunction);
-    return () => {
-      window.removeEventListener("keydown", eventFunction);
-    };
-  }, [currentSongIndex, progressBarCurrent]);
-
-  useEffect(() => {
     player?.setVolume(volume);
   }, [volume]);
 
