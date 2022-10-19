@@ -17,8 +17,6 @@ export default function Search({ currentSource }: Props): JSX.Element {
       <SearchBar setResults={(results) => setResults(results)} />
       <div className={styles.SearchResults}>
         {results.map((result, index) => {
-          if (result.snippet.liveBroadcastContent === "live") return null;
-
           return (
             <Result data={result} key={index} currentSource={currentSource} />
           );

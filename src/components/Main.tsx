@@ -12,6 +12,8 @@ interface Props {
   currentSongIndex: number;
   setCurrentSongIndex(index: number): void;
   page: string;
+  currentId: string | undefined;
+  setCurrentId(id: string): void;
 }
 
 export default function Main({
@@ -20,6 +22,8 @@ export default function Main({
   currentSongIndex,
   setCurrentSongIndex,
   page,
+  currentId,
+  setCurrentId,
 }: Props): JSX.Element {
   const [currentPlaylistInfo, setCurrentPlaylistInfo] = useState<any>();
   const [customPositionClass, setCustomPositionClass] = useState<any>();
@@ -31,13 +35,21 @@ export default function Main({
 
     async function handleVideos() {
       const data = await fetch(
-        `https://youtube.googleapis.com/youtube/v3/videos?id=${id}&part=snippet&key=${process.env.REACT_APP_API_KEY}`
+        `https://youtube.googleapis.com/youtube/v3/videos?id=${id}&part=snippet&part=contentDetails&fields=items(contentDetails%2FcontentRating%2C%20id%2C%20kind%2C%20snippet(channelTitle%2C%20liveBroadcastContent%2C%20thumbnails%2Fdefault%2Furl%2C%20title))&key=${process.env.REACT_APP_API_KEY}`
       );
       const response = await data.json();
       const video = response.items[0];
 
-      if (!video || video.snippet.liveBroadcastContent === "live") {
-        navigate("/");
+      if (
+        !video ||
+        video.snippet.liveBroadcastContent === "live" ||
+        video.contentDetails.contentRating.ytRating === "ytAgeRestricted"
+      ) {
+        if (currentId) {
+          navigate(`/${currentId}`);
+        } else {
+          navigate("/");
+        }
         return;
       }
 
@@ -49,6 +61,7 @@ export default function Main({
         index: 0,
       };
 
+      setCurrentId(newSource.id);
       setCurrentPlaylistInfo(newSource);
       setNewPlaylist([newSource]);
     }
@@ -71,10 +84,15 @@ export default function Main({
       const newPlaylist = await getPlaylistVideos(id);
 
       if (!newPlaylist) {
-        navigate("/");
+        if (currentId) {
+          navigate(`/${currentId}`);
+        } else {
+          navigate("/");
+        }
         return;
       }
 
+      setCurrentId(newSource.id);
       setCurrentPlaylistInfo(newSource);
       setNewPlaylist(newPlaylist);
     }

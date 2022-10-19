@@ -17,7 +17,7 @@ export async function getPlaylistVideos(id: string) {
       const playlistData: any = await fetch(
         `https://youtube.googleapis.com/youtube/v3/playlistItems?${
           nextPageToken ? `pageToken=${nextPageToken}` : ""
-        }&part=snippet&maxResults=50&playlistId=${id}&fields=nextPageToken%2C%20pageInfo%2C%20items%2Fsnippet(title%2C%20videoOwnerChannelTitle%2C%20resourceId%2C%20thumbnails%2Fdefault(url))&key=${
+        }&part=snippet&maxResults=50&playlistId=${id}&fields=nextPageToken%2C%20pageInfo%2C%20items%2Fsnippet(title%2C%20videoOwnerChannelTitle%2C%20resourceId%2C%20thumbnails%2Fdefault%2Furl)&key=${
           process.env.REACT_APP_API_KEY
         }`
       );

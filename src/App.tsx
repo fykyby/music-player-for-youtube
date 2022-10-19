@@ -21,6 +21,7 @@ export default function App(): JSX.Element {
   const [currentPlaylist, setCurrentPlaylist] = useState<Array<Source>>([]);
   const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
   const [page, setPage] = useState<Page>("Playlist");
+  const [currentId, setCurrentId] = useState<string>();
 
   function setNewPlaylist(newPlaylist: Array<Source>) {
     setCurrentSongIndex(0);
@@ -47,6 +48,8 @@ export default function App(): JSX.Element {
         currentSongIndex={currentSongIndex}
         setCurrentSongIndex={setCurrentSongIndex}
         page={page}
+        currentId={currentId}
+        setCurrentId={setCurrentId}
       />
       <Player
         currentPlaylist={currentPlaylist}
