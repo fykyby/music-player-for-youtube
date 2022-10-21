@@ -50,6 +50,8 @@ export default function Player({
     if (!newSource) return;
     if (player.playerInfo?.videoData?.video_id === newSource.id) return;
 
+    document.title = newSource.title + " - Music Player for YouTube";
+
     changeSource(newSource.id);
   }, [currentSongIndex, currentPlaylist, player]);
 
