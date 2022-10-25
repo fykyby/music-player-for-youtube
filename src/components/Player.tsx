@@ -58,17 +58,13 @@ export default function Player({
   function startProgressTimer(): void {
     setProgressInterval(
       setInterval(() => {
-        setProgressTime(player.getCurrentTime());
+        setProgressBarCurrent(player.getCurrentTime());
       }, 1000)
     );
   }
 
   function clearProgressTimer(): void {
     clearInterval(progressInterval);
-  }
-
-  function setProgressTime(seconds: number): void {
-    setProgressBarCurrent(seconds);
   }
 
   function onPlayerReady(e: any): void {
@@ -113,7 +109,7 @@ export default function Player({
   function handleSeek(seconds: number): void {
     clearProgressTimer();
     player.seekTo(Math.floor(seconds), true);
-    setProgressTime(seconds);
+    setProgressBarCurrent(seconds);
   }
 
   function handleEnd(): void {
@@ -152,7 +148,7 @@ export default function Player({
 
   function changeSource(id: string): void {
     try {
-      setProgressTime(0);
+      setProgressBarCurrent(0);
       player.loadVideoById(id);
     } catch (err) {
       console.log(err);
