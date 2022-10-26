@@ -43,7 +43,7 @@ export async function getPlaylistVideos(id: string) {
         return newItem;
       });
 
-      newPlaylist = [...newPlaylist, ...finalPlaylistData];
+      newPlaylist = [...finalPlaylistData];
     } while (nextPageToken);
 
     return newPlaylist;
