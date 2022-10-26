@@ -46,10 +46,6 @@ export async function getPlaylistVideos(id: string) {
       newPlaylist = [...newPlaylist, ...finalPlaylistData];
     } while (nextPageToken);
 
-    newPlaylist.forEach((item, index) => {
-      item.index = index;
-    });
-
     return newPlaylist;
   } catch (err) {
     console.log(err);

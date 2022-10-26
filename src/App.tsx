@@ -12,7 +12,6 @@ export type Source = {
   title: string;
   channelTitle: string;
   thumbnail: string;
-  index: number;
 };
 
 export type Page = "Search" | "Playlist";
@@ -34,9 +33,6 @@ export default function App(): JSX.Element {
     newPlaylist.splice(currentSongIndex, 1);
     newPlaylist = shuffleArray(currentPlaylist);
     newPlaylist.unshift(currSrc);
-    newPlaylist.forEach((item, index) => {
-      item.index = index;
-    });
     setNewPlaylist(newPlaylist);
   }
 

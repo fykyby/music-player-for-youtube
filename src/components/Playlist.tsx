@@ -33,6 +33,7 @@ export default function Playlist({
         return (
           <PlaylistSong
             data={result}
+            index={index}
             currentSource={currentSource}
             key={index}
             setCurrentSongIndex={setCurrentSongIndex}

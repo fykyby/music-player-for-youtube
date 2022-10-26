@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 interface Props {
   data: any;
+  index: number;
   currentSource: Source | undefined;
   setCurrentSongIndex(index: number): void;
 }
@@ -13,6 +14,7 @@ export default function PlaylistSong({
   data,
   currentSource,
   setCurrentSongIndex,
+  index,
 }: Props): JSX.Element {
   const [playing, setPlaying] = useState(false);
 
@@ -26,8 +28,8 @@ export default function PlaylistSong({
 
   async function handleClick(e: any) {
     e.preventDefault();
-    if (currentSource?.index === data.index) return;
-    setCurrentSongIndex(data.index);
+    if (currentSource?.id === data.id) return;
+    setCurrentSongIndex(index);
   }
 
   return (
@@ -36,7 +38,7 @@ export default function PlaylistSong({
       className={`${styles.Video} ${playing ? styles.playing : null}`}
       onClick={(e) => handleClick(e)}
     >
-      <div className={styles.index}>{data.index + 1}</div>
+      <div className={styles.index}>{index + 1}</div>
       <div className={styles.thumbnailContainer}>
         <img src={data.thumbnail} alt="thumbnail" />
       </div>
