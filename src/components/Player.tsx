@@ -40,7 +40,11 @@ export default function Player({
   const [muted, setMuted] = useState<boolean>(false);
 
   useEffect(() => {
-    player?.setVolume(volume);
+    try {
+      player?.setVolume(volume);
+    } catch (err) {
+      console.error(err);
+    }
   }, [volume]);
 
   useEffect(() => {
@@ -165,8 +169,24 @@ export default function Player({
     }
   }
 
-  function handleVolumeChange(e: any): void {
-    setVolume(e.target.value);
+  function handleVolumeBarScroll(e: any): void {
+    if (e.deltaY < 0) {
+      setVolume((prev) => {
+        if (prev + 1 > 100) {
+          return 100;
+        } else {
+          return prev + 1;
+        }
+      });
+    } else {
+      setVolume((prev) => {
+        if (prev - 1 < 0) {
+          return 0;
+        } else {
+          return prev - 1;
+        }
+      });
+    }
   }
 
   return (
@@ -257,9 +277,8 @@ export default function Player({
               value={volume}
               min={0}
               max={100}
-              onChange={(e) => {
-                handleVolumeChange(e);
-              }}
+              onChange={(e) => setVolume(parseInt(e.target.value))}
+              onWheel={(e) => handleVolumeBarScroll(e)}
             />
           </div>
         </div>
