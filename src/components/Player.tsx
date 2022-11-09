@@ -155,7 +155,7 @@ export default function Player({
       setProgressBarCurrent(0);
       player.loadVideoById(id);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 
