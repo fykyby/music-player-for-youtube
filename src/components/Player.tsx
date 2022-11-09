@@ -172,19 +172,13 @@ export default function Player({
   function handleVolumeBarScroll(e: any): void {
     if (e.deltaY < 0) {
       setVolume((prev) => {
-        if (prev + 1 > 100) {
-          return 100;
-        } else {
-          return prev + 1;
-        }
+        if (prev + 1 > 100) return 100;
+        return prev + 1;
       });
     } else {
       setVolume((prev) => {
-        if (prev - 1 < 0) {
-          return 0;
-        } else {
-          return prev - 1;
-        }
+        if (prev - 1 < 0) return 0;
+        return prev - 1;
       });
     }
   }
