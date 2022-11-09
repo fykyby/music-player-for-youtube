@@ -28,6 +28,8 @@ export default function App(): JSX.Element {
   }
 
   function shufflePlaylist(): void {
+    if (currentPlaylist.length === 0) return;
+
     let newPlaylist = currentPlaylist;
     const currSrc = newPlaylist[currentSongIndex];
     newPlaylist.splice(currentSongIndex, 1);
