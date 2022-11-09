@@ -170,15 +170,18 @@ export default function Player({
   }
 
   function handleVolumeBarScroll(e: any): void {
+    let scrollAmount = 5;
+    if (e.nativeEvent.shiftKey) scrollAmount = 1;
+
     if (e.deltaY < 0) {
       setVolume((prev) => {
-        if (prev + 1 > 100) return 100;
-        return prev + 1;
+        if (prev + scrollAmount > 100) return 100;
+        return prev + scrollAmount;
       });
     } else {
       setVolume((prev) => {
-        if (prev - 1 < 0) return 0;
-        return prev - 1;
+        if (prev - scrollAmount < 0) return 0;
+        return prev - scrollAmount;
       });
     }
   }
