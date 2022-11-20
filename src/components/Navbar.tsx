@@ -14,7 +14,7 @@ export default function Navbar({ setPage, page }: Props): JSX.Element {
       <button
         onClick={() => setPage("Playlist")}
         className={`${styles.link} ${miscStyles.button} ${
-          page === "Playlist" ? styles.active : null
+          page === "Playlist" ? styles.active : ""
         }`}
       >
         <MusicNoteList className={miscStyles.smallIcon} />
@@ -22,7 +22,7 @@ export default function Navbar({ setPage, page }: Props): JSX.Element {
       <button
         onClick={() => setPage("Search")}
         className={`${styles.link} ${miscStyles.button} ${
-          page === "Search" ? styles.active : null
+          page === "Search" ? styles.active : ""
         }`}
       >
         <Search className={miscStyles.smallIcon} />

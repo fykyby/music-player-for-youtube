@@ -248,7 +248,7 @@ export default function Player({
           </button>
           <button
             className={`${miscStyles.button} ${miscStyles.smallButton}
-              ${repeat !== 0 ? miscStyles.active : null}
+              ${repeat !== 0 ? miscStyles.active : ""}
               `}
             onClick={handleRepeat}
           >

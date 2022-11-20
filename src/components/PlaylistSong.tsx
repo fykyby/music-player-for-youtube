@@ -35,7 +35,7 @@ export default function PlaylistSong({
   return (
     <Link
       to={`/${data.id}`}
-      className={`${styles.Video} ${playing ? styles.playing : null}`}
+      className={`${styles.Video} ${playing ? styles.playing : ""}`}
       onClick={(e) => handleClick(e)}
     >
       <div className={styles.index}>{index + 1}</div>

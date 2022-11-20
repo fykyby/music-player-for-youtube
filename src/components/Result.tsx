@@ -41,7 +41,7 @@ export default function Result({ data, currentSource }: Props): JSX.Element {
           : `/${data.id.playlistId}`
       }
       className={`${styles.Video} ${
-        playing && data.id.kind === "youtube#video" ? styles.playing : null
+        playing && data.id.kind === "youtube#video" ? styles.playing : ""
       }`}
       onClick={(e) => handleClick(e)}
     >
